@@ -1,12 +1,19 @@
 package com.example.business;
 
 import java.util.List;
-
-import com.example.data.MacchinarioEntity;
+import com.example.presentation.DTOs.MacchinarioDTO;
 
 public interface MacchinarioService {
-	public List<MacchinarioEntity> getAll();
-	MacchinarioEntity findById(Long id);
-	MacchinarioEntity save(MacchinarioEntity entity);
-	void delete(Long id);
+
+   
+    List<MacchinarioDTO> getAll();
+
+   
+    MacchinarioDTO findById(Long id);
+
+    
+    MacchinarioDTO save(MacchinarioDTO dto);
+
+   
+    void delete(Long id);
 }
