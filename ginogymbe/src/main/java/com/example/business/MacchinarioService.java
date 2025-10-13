@@ -7,13 +7,7 @@ public interface MacchinarioService {
 
    
     List<MacchinarioDTO> getAll();
-
-   
-    MacchinarioDTO findById(Long id);
-
-    
+    MacchinarioDTO findById(Long id);    
     MacchinarioDTO save(MacchinarioDTO dto);
-
-   
     void delete(Long id);
 }
