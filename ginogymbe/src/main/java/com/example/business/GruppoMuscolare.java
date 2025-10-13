@@ -2,12 +2,13 @@ package com.example.business;
 
 import java.util.List;
 
-import com.example.data.GruppoMuscolareEntity;
+
+import com.example.presentation.DTOs.GruppoMuscolareDTO;
 
 public interface GruppoMuscolare  {
 
-	public List<GruppoMuscolareEntity> getAll();
-	GruppoMuscolareEntity findById(Long id);
-	GruppoMuscolareEntity save(GruppoMuscolareEntity entity);
+	public List<GruppoMuscolareDTO> getAll();
+	GruppoMuscolareDTO findById(Long id);
+	GruppoMuscolareDTO save(GruppoMuscolareDTO dto);
 	void delete(Long id);
 }

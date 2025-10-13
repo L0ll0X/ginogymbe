@@ -11,37 +11,49 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.business.GruppoMuscolare;
 import com.example.data.GruppoMuscolareEntity;
+import com.example.presentation.DTOs.GruppoMuscolareDTO;
 
-@Controller
-@RequestMapping ("/gruppi-muscolari")
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/gruppi-muscolari")
+@RequiredArgsConstructor
 public class GruppoMuscolareController {
-	
+
 	@Autowired
-	private GruppoMuscolare service;
-	
-	@GetMapping
-	@ResponseBody
-	public List<GruppoMuscolareEntity>getAll() {
-		return service.getAll();
-	}
-	@GetMapping ("/{id}")
-	@ResponseBody
-	public GruppoMuscolareEntity getById(@PathVariable Long id) {
-        return service.findById(id); 
-     }
-	@PostMapping
-	@ResponseBody
-	public GruppoMuscolareEntity create(@RequestBody GruppoMuscolareEntity entity) {
-		return service.save(entity);
-	}
-	@DeleteMapping("/{id}")
-	@ResponseBody
-	public void delete(@PathVariable Long id) {
-		service.delete(id);
-	}
-	
-	
+    private final GruppoMuscolare service;
+
+    @GetMapping
+    public List<GruppoMuscolareDTO> getAll() {
+        return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public GruppoMuscolareDTO getById(@PathVariable Long id) {
+        GruppoMuscolareEntity entity = service.findById(id);
+        return GruppoMuscolareDTO.builder()
+                .id(entity.getId())
+                .nome(entity.getNome())
+                .descrizione(entity.getDescrizione())
+                .build();
+    }
+
+    @PostMapping
+    public GruppoMuscolareDTO create(@RequestBody GruppoMuscolareEntity entity) {
+        GruppoMuscolareEntity saved = service.save(entity);
+        return GruppoMuscolareDTO.builder()
+                .id(saved.getId())
+                .nome(saved.getNome())
+                .descrizione(saved.getDescrizione())
+                .build();
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
 }

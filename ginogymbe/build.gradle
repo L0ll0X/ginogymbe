@@ -34,8 +34,8 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 
 	// Lombok
-	compileOnly 'org.projectlombok:lombok:1.18.30'
-	annotationProcessor 'org.projectlombok:lombok:1.18.30'
+	compileOnly 'org.projectlombok:lombok:1.18.32'
+annotationProcessor 'org.projectlombok:lombok:1.18.32'
 
 	// Development tools
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
