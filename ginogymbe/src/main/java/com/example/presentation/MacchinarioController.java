@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import com.example.business.MacchinarioService;
 import com.example.data.MacchinarioEntity;
 
+import lombok.Data;
+
 @RestController
 @RequestMapping("/macchinari")
 public class MacchinarioController {
@@ -34,7 +36,7 @@ public class MacchinarioController {
 
     @PutMapping
     public MacchinarioEntity update(@PathVariable Long id, @RequestBody MacchinarioEntity entity) {
-        entity.setId(id); 
+        //entity.setId(id); 
         return macchinarioService.save(entity);
     }
 
