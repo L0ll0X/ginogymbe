@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.business.GruppoMuscolareService;
 import com.example.data.GruppoMuscolareEntity;
 import com.example.presentation.DTOs.GruppoMuscolareDTO;
+import com.example.presentation.Requests.CreateGruppoMuscolareRequest;
 import com.example.presentation.Requests.PageRequests;
 
 import lombok.RequiredArgsConstructor;
@@ -46,12 +47,10 @@ public class GruppoMuscolareController {
 
     @PostMapping
     public GruppoMuscolareDTO create(@RequestBody CreateGruppoMuscolareRequest request) {
-        GruppoMuscolareEntity saved = service.save(request);
-        return GruppoMuscolareDTO.builder()
-                .id(saved.getId())
-                .nome(saved.getNome())
-                .descrizione(saved.getDescrizione())
-                .build();
+    	
+        //GruppoMuscolareEntity saved = service.save(request);
+       // return GruppoMuscolareDTO.builder().id(saved.getId()).nome(saved.getNome()).descrizione(saved.getDescrizione()).build();
+    	return new GruppoMuscolareDTO();
     }
     
     //piumapping? ???? dov'è
