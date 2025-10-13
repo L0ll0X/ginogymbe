@@ -9,6 +9,7 @@ import com.example.business.MacchinarioService;
 import com.example.presentation.DTOs.MacchinarioDTO;
 
 @RestController
+@CrossOrigin(origins="http://localhost:4200")
 @RequestMapping("/macchinari")
 public class MacchinarioController {
 
