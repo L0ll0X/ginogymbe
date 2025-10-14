@@ -1,9 +1,7 @@
 package com.ginogym.data.repositories;
 
-import com.ginogym.business.DTOs.UserDTO;
 import com.ginogym.data.entities.User;
 
-import org.springdoc.core.converters.models.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
