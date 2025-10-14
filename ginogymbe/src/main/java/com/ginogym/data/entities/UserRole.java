@@ -1,0 +1,26 @@
+package com.ginogym.data.entities;
+
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "user_roles")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class UserRole {
+
+    @EmbeddedId
+    private UserRoleId id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("userId")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("roleId")
+    private Role role;
+
+}
