@@ -12,5 +12,5 @@ public interface UserRoleRepository extends JpaRepository<UserRole, UserRoleId>{
 
     //nominali
     List<UserRole> findByUser_Id(Long userId);
-    List<UserRole> findByRole_ID(Long roleId); 
+    List<UserRole> findByRole_Id(Long roleId); 
 }

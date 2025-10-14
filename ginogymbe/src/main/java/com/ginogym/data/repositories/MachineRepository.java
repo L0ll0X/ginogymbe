@@ -14,6 +14,4 @@ public interface MachineRepository extends JpaRepository<Machine, Long> {
 
     Page<Machine> findByMuscleGroup_Name(String muscleGroupName,Pageable pageable );
 
-    List<Machine> findByBrandContainingIgnoreCase(String brand);
-
 }
