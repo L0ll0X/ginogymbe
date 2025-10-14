@@ -60,6 +60,7 @@ public class MachineController {
     @PutMapping("/{id}")
     public ResponseEntity<MachineDTO> update(@PathVariable Long id, @RequestBody MachineDTO dto) {
         MachineDTO updated = machineService.updateMachine(id, dto);
+        
         return ResponseEntity.ok(updated);
     }
 
