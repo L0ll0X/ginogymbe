@@ -20,4 +20,7 @@ public class MuscleGroup {
 
     @OneToMany(mappedBy = "muscleGroup", cascade = CascadeType.ALL)
     private List<Machine> machines;
+
+    @OneToMany(mappedBy = "muscleGroup", cascade = CascadeType.ALL)
+    private List<Exercise> exercises;
 }
