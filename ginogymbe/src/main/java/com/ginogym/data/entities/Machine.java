@@ -1,5 +1,7 @@
 package com.ginogym.data.entities;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,4 +23,7 @@ public class Machine {
     @ManyToOne
     @JoinColumn(name = "muscle_group_id")
     private MuscleGroup muscleGroup;
+
+    @OneToMany(mappedBy = "machine", cascade = CascadeType.ALL)
+    private List<Exercise> exercises;
 }
