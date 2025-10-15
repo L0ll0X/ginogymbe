@@ -2,7 +2,6 @@ package com.ginogym.data.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user_roles")
