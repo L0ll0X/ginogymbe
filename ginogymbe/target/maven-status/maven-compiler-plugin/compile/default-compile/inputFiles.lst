@@ -1,9 +1,27 @@
-c:\Users\v.truglia\Desktop\Progetti\ginogym\src\main\java\com\ginogym\App.java
-c:\Users\v.truglia\Desktop\Progetti\ginogym\src\main\java\com\ginogym\data\entities\Machine.java
-c:\Users\v.truglia\Desktop\Progetti\ginogym\src\main\java\com\ginogym\data\entities\MuscleGroup.java
-c:\Users\v.truglia\Desktop\Progetti\ginogym\src\main\java\com\ginogym\data\entities\Role.java
-c:\Users\v.truglia\Desktop\Progetti\ginogym\src\main\java\com\ginogym\data\entities\User.java
-c:\Users\v.truglia\Desktop\Progetti\ginogym\src\main\java\com\ginogym\data\entities\UserRole.java
-c:\Users\v.truglia\Desktop\Progetti\ginogym\src\main\java\com\ginogym\data\entities\UserRoleId.java
-c:\Users\v.truglia\Desktop\Progetti\ginogym\src\main\java\com\ginogym\data\repositories\RoleRepository.java
-c:\Users\v.truglia\Desktop\Progetti\ginogym\src\main\java\com\ginogym\data\repositories\UserRepository.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\App.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\business\DTOs\MachineDTO.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\business\DTOs\MuscleGroupDTO.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\business\DTOs\RoleDTO.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\business\DTOs\UserDTO.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\business\impls\MuscleGroupServiceImpl.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\business\impls\UserServiceImpl.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\business\MachineService.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\business\MuscleGroupService.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\business\RoleService.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\business\UserService.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\configuration\ModelMapperConfig.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\data\entities\Machine.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\data\entities\MuscleGroup.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\data\entities\Role.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\data\entities\User.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\data\entities\UserRole.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\data\entities\UserRoleId.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\data\repositories\MachineRepository.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\data\repositories\MuscleGroupRepository.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\data\repositories\RoleRepository.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\data\repositories\UserRepository.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\data\repositories\UserRoleRepository.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\mapper\MuscleGroupMapper.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\mapper\UserMapper.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\presentation\MuscleGroupController.java
+c:\Users\ASUS\Desktop\GINOGYM BE\ginogymbe\src\main\java\com\ginogym\presentation\UserController.java
