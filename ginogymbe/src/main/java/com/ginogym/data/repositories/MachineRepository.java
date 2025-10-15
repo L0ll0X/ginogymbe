@@ -7,13 +7,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 
 @Repository
 public interface MachineRepository extends JpaRepository<Machine, Long> {
 
     Page<Machine> findByMuscleGroup_Name(String muscleGroupName,Pageable pageable );
 
-    List<Machine> findByBrandContainingIgnoreCase(String brand);
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop_tatiana
 }

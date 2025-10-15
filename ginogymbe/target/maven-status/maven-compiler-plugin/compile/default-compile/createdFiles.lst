@@ -1,7 +1,7 @@
 com\ginogym\data\entities\Machine.class
+com\ginogym\presentation\UserController.class
 com\ginogym\business\DTOs\MachineDTO$MachineDTOBuilder.class
 com\ginogym\data\entities\MuscleGroup$MuscleGroupBuilder.class
-com\ginogym\business\impls\MachineServiceImpl.class
 com\ginogym\data\repositories\UserRoleRepository.class
 com\ginogym\business\DTOs\RoleDTO.class
 com\ginogym\data\entities\UserRole.class
@@ -17,7 +17,6 @@ com\ginogym\data\entities\User$UserBuilder.class
 com\ginogym\business\DTOs\RoleDTO$RoleDTOBuilder.class
 com\ginogym\mapper\UserMapper.class
 com\ginogym\business\DTOs\UserDTO$UserDTOBuilder.class
-com\ginogym\mapper\MachineMapper.class
 com\ginogym\data\repositories\MachineRepository.class
 com\ginogym\configuration\ModelMapperConfig.class
 com\ginogym\data\entities\Machine$MachineBuilder.class
