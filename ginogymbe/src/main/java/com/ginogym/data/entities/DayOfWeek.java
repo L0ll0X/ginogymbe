@@ -1,15 +1,11 @@
 package com.ginogym.data.entities;
 
 import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -18,28 +14,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table (name = "exercises")
+@Table(name="days_of_week")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class Exercise {
+public class DayOfWeek {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "muscle_group_id")
-    private MuscleGroup muscleGroup;
+    private String descrizione;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "machine_id")
-    private Machine machine;
-
-    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "dayOfWeek", cascade = CascadeType.ALL)
     private List<ExerciseDetail> exerciseDetails;
-    
 }
