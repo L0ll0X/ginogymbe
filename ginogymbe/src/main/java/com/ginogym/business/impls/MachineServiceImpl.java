@@ -54,7 +54,7 @@ public class MachineServiceImpl implements MachineService {
 
     public MachineDTO updateMachine(Long id, MachineDTO machineDTO) {
         Machine existing = machineRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Machine not found"));
         machineMapper.updateMachineFromDTO(machineDTO, existing);
         return machineMapper.toDTO(machineRepository.save(existing));
     }
