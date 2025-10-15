@@ -1,4 +1,8 @@
 /.metadata/
 ginogymbe/.metadata/
+<<<<<<< HEAD
 ginogymbe/target/ginogym-1.0-SNAPSHOT.jar
 ginogymbe/target/
+=======
+ginogymbe/
+>>>>>>> develop_luca

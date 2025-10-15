@@ -4,6 +4,7 @@ import com.ginogym.business.DTOs.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -19,4 +20,6 @@ public interface UserService {
     UserDTO updateUser(Long id, UserDTO userDTO);
 
     void deleteUser(Long id);
+    
+    List<UserDTO> getUsersByRole(String roleName);
 }
