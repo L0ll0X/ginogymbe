@@ -1,5 +1,6 @@
 package com.ginogym.business.impls;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -17,8 +18,8 @@ import com.ginogym.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+@RequiredArgsConstructor 
+public class UserServiceImpl implements UserService { 
     private final UserRepository userRepository;
     private final UserMapper mapper;
 
@@ -59,6 +60,14 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+    @Override
+    public List<UserDTO> getUsersByRole(String roleName) {
+    List<User> users = userRepository.findDistinctByRoles_Name(roleName);
+    return users.stream()
+                .map(mapper::toDTO)
+                .collect(Collectors.toList());
+}
+
 
    
 }
