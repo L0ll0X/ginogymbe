@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 
 import com.ginogym.business.DTOs.ExerciseDTO;
 import com.ginogym.data.entities.Exercise;
-import com.ginogym.presentation.request.CreateExerciseRequest;
-import com.ginogym.presentation.request.ModifyExerciseRequest;
+import com.ginogym.presentation.requests.CreateExerciseRequest;
+import com.ginogym.presentation.requests.ModifyExerciseRequest;
 
 @Component
 public class ExerciseMapper {

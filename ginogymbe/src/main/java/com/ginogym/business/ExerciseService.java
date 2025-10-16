@@ -6,8 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.ginogym.business.DTOs.ExerciseDTO;
-import com.ginogym.presentation.request.CreateExerciseRequest;
-import com.ginogym.presentation.request.ModifyExerciseRequest;
+import com.ginogym.presentation.requests.CreateExerciseRequest;
+import com.ginogym.presentation.requests.ModifyExerciseRequest;
 
 public interface ExerciseService {
 
