@@ -24,7 +24,11 @@ private final ModelMapper mapper;
     }
 
     public MuscleGroup toEntity(MuscleGroupDTO dto) {
-        return mapper.map(dto, MuscleGroup.class);
+        MuscleGroup entity = mapper.map(dto, MuscleGroup.class);
+          if (dto.getName() != null) {
+            entity.setName(dto.getName());
+        }
+        return entity;
     }
 
     public void updateMuscleGroupFromDTO(MuscleGroupDTO dto, MuscleGroup muscleGroup) {

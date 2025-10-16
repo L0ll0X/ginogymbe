@@ -8,7 +8,6 @@ import com.ginogym.data.entities.Exercise;
 import com.ginogym.presentation.requests.CreateExerciseRequest;
 import com.ginogym.presentation.requests.ModifyExerciseRequest;
 
-
 @Component
 public class ExerciseMapper {
 
