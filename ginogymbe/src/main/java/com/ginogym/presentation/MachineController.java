@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import lombok.RequiredArgsConstructor;
+
 
 @RestController
-@RequestMapping("/api/machines")
-@CrossOrigin(origins = "*") 
+@RequestMapping ("/api/machines")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class MachineController {
 

@@ -18,9 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ginogym.business.ExerciseService;
 import com.ginogym.business.DTOs.ExerciseDTO;
-import com.ginogym.presentation.request.CreateExerciseRequest;
-import com.ginogym.presentation.request.ModifyExerciseRequest;
-
+import com.ginogym.presentation.requests.CreateExerciseRequest;
+import com.ginogym.presentation.requests.ModifyExerciseRequest;
 
 import lombok.RequiredArgsConstructor;
 

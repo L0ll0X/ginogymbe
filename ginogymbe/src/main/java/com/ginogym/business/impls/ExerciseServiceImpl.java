@@ -17,8 +17,8 @@ import com.ginogym.data.entities.Machine;
 import com.ginogym.data.entities.MuscleGroup;
 import com.ginogym.data.repositories.ExerciseRepository;
 import com.ginogym.mapper.ExerciseMapper;
-import com.ginogym.presentation.request.CreateExerciseRequest;
-import com.ginogym.presentation.request.ModifyExerciseRequest;
+import com.ginogym.presentation.requests.CreateExerciseRequest;
+import com.ginogym.presentation.requests.ModifyExerciseRequest;
 
 import lombok.RequiredArgsConstructor;
 
