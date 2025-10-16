@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ginogym.business.ExerciseService;
 import com.ginogym.business.DTOs.ExerciseDTO;
+import com.ginogym.presentation.request.CreateExerciseRequest;
+import com.ginogym.presentation.request.ModifyExerciseRequest;
+
 
 import lombok.RequiredArgsConstructor;
 
@@ -48,13 +51,13 @@ public class ExerciseController {
     }
     
     @PostMapping
-    public ResponseEntity<ExerciseDTO> create(@RequestBody ExerciseDTO dto) {
+    public ResponseEntity<ExerciseDTO> create(@RequestBody CreateExerciseRequest dto) {
         ExerciseDTO created = exerciseService.createExercise(dto);
         return ResponseEntity.created(URI.create("/api/exercises/" + created.getId())).body(created);
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<ExerciseDTO> update(@PathVariable Long id, @RequestBody ExerciseDTO dto) {
+    public ResponseEntity<ExerciseDTO> update(@PathVariable Long id, @RequestBody ModifyExerciseRequest dto) {
         ExerciseDTO updated = exerciseService.updateExercise(id, dto);
         return ResponseEntity.ok(updated);
     }
