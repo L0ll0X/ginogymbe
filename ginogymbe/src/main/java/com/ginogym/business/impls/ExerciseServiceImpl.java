@@ -17,6 +17,8 @@ import com.ginogym.data.entities.Machine;
 import com.ginogym.data.entities.MuscleGroup;
 import com.ginogym.data.repositories.ExerciseRepository;
 import com.ginogym.mapper.ExerciseMapper;
+import com.ginogym.presentation.request.CreateExerciseRequest;
+import com.ginogym.presentation.request.ModifyExerciseRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -68,17 +70,17 @@ public class ExerciseServiceImpl implements ExerciseService{
     }
 
     @Override
-    public ExerciseDTO createExercise(ExerciseDTO exerciseDTO) {
-        Exercise exercise =mapper.toEntity(exerciseDTO);
+    public ExerciseDTO createExercise(CreateExerciseRequest exerciseRequest) {
+        Exercise exercise =mapper.requestToEntity(exerciseRequest);
         Exercise saved = exerciseRepository.save(exercise);
         return mapper.toDTO(saved);
     }
 
     @Override
-    public ExerciseDTO updateExercise(Long id, ExerciseDTO exerciseDTO) {
+    public ExerciseDTO updateExercise(Long id, ModifyExerciseRequest exerciseRequest) {
         Exercise existing = exerciseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Exercise not found"));
-        mapper.updateExerciseFromDTO(exerciseDTO, existing);
+        mapper.requestUpdateExerciseFromDTO(exerciseRequest, existing);
         return mapper.toDTO(exerciseRepository.save(existing));
     }
 

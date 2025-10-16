@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.ginogym.business.DTOs.ExerciseDTO;
+import com.ginogym.presentation.request.CreateExerciseRequest;
+import com.ginogym.presentation.request.ModifyExerciseRequest;
 
 public interface ExerciseService {
 
@@ -19,9 +21,9 @@ public interface ExerciseService {
 
     Page<ExerciseDTO> getExerciseByMachine (String machineName, Pageable pageable);
 
-    ExerciseDTO createExercise (ExerciseDTO exerciseDTO);
+    ExerciseDTO createExercise (CreateExerciseRequest exerciseDTO);
 
-    ExerciseDTO updateExercise (Long id, ExerciseDTO exerciseDTO);
+    ExerciseDTO updateExercise (Long id, ModifyExerciseRequest exerciseDTO);
 
     void deleteExercise (Long id);
 
