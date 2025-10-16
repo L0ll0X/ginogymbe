@@ -1,10 +1,6 @@
 package com.ginogym.data.entities;
-
-<<<<<<< HEAD
 import java.util.List;
-=======
 import com.fasterxml.jackson.annotation.JsonIgnore;
->>>>>>> develop_tatiana
 
 import jakarta.persistence.*;
 import lombok.*;
