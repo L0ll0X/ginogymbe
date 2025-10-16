@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "muscle_groups")
 @Data
@@ -19,5 +21,6 @@ public class MuscleGroup {
     private String name; // es. "Chest", "Back", "Legs", "Shoulders"
 
     @OneToMany(mappedBy = "muscleGroup", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Machine> machines;
 }

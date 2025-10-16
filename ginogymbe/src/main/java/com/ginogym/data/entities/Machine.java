@@ -1,5 +1,7 @@
 package com.ginogym.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,5 +22,6 @@ public class Machine {
     
     @ManyToOne
     @JoinColumn(name = "muscle_group_id")
+    @JsonIgnore
     private MuscleGroup muscleGroup;
 }
