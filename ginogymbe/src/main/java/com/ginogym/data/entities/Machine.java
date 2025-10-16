@@ -1,6 +1,10 @@
 package com.ginogym.data.entities;
 
+<<<<<<< HEAD
 import java.util.List;
+=======
+import com.fasterxml.jackson.annotation.JsonIgnore;
+>>>>>>> develop_tatiana
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,6 +26,7 @@ public class Machine {
     
     @ManyToOne
     @JoinColumn(name = "muscle_group_id")
+    @JsonIgnore
     private MuscleGroup muscleGroup;
 
     @OneToMany(mappedBy = "machine", cascade = CascadeType.ALL)

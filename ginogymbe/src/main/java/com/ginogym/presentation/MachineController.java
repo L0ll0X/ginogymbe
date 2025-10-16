@@ -1,14 +1,13 @@
 package com.ginogym.presentation;
 
-
 import java.net.URI;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ginogym.business.MachineService;
 import com.ginogym.business.DTOs.MachineDTO;
@@ -31,37 +30,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class MachineController {
-   
- private final MachineService   machineService;
 
- @GetMapping
-    public ResponseEntity<Page<MachineDTO>> getAll(Pageable pageable) {
-        Page<MachineDTO> machine = machineService.getAllMachines(pageable);
-        return ResponseEntity.ok(machine);
+    private final MachineService machineService;
+
+    
+    @GetMapping
+    public ResponseEntity<Page<MachineDTO>> getAll(
+            @PageableDefault(page = 0, size = 10, sort = "nome") Pageable pageable) {
+
+        Page<MachineDTO> machines = machineService.getAllMachines(pageable);
+        return ResponseEntity.ok(machines);
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@RequestParam Long id) {
-        Optional<MachineDTO> machine;
-        try {
-           machine  = machineService.getMachineById(id);
-            
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
-        return machine.map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
 
-}
- @PostMapping
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        Optional<MachineDTO> machine = machineService.getMachineById(id);
+        return machine.map(ResponseEntity::ok)
+                      .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
     public ResponseEntity<MachineDTO> create(@RequestBody MachineDTO dto) {
         MachineDTO created = machineService.createMachine(dto);
-        return ResponseEntity.created(URI.create("/api/machines/" + created.getId())).body(created);
+        return ResponseEntity.created(URI.create("/api/machines/" + created.getId()))
+                             .body(created);
     }
-    
+
     @PutMapping("/{id}")
     public ResponseEntity<MachineDTO> update(@PathVariable Long id, @RequestBody MachineDTO dto) {
         MachineDTO updated = machineService.updateMachine(id, dto);
-        
         return ResponseEntity.ok(updated);
     }
 
@@ -71,5 +69,3 @@ public class MachineController {
         return ResponseEntity.noContent().build();
     }
 }
-
-

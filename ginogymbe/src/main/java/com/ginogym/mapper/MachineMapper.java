@@ -12,9 +12,12 @@ import jakarta.persistence.EntityNotFoundException;
 @Component
 public class MachineMapper {
 
+    private final MuscleGroupRepository muscleGroupRepository;
+
     private final ModelMapper mapper;
 
     public MachineMapper (ModelMapper mapper, MuscleGroupRepository muscleGroupRepository) {
+        this.muscleGroupRepository = muscleGroupRepository;
         this.mapper=mapper;
     }
 
@@ -33,14 +36,12 @@ public class MachineMapper {
     public void updateMachineFromDTO(MachineDTO dto, Machine machine) {
         if (dto.getName() != null) machine.setName(dto.getName());
         if (dto.getDescription() !=null) machine.setDescription(dto.getDescription());
-        if (dto.getMuscleGroup() !=null) {
-           MuscleGroup gruppoMuscolareOptional = machine.getMuscleGroup();
-            if (gruppoMuscolareOptional != null) {
-                machine.setMuscleGroup(gruppoMuscolareOptional);
-            } else {
-                throw new EntityNotFoundException("MuscleGroup non trovato con nome: " + dto.getMuscleGroup());
-            }
-        }
+          if (dto.getMuscleGroup() != null) {
+        MuscleGroup mg = muscleGroupRepository.findById(dto.getMuscleGroup().getId())
+            .orElseThrow(() -> new EntityNotFoundException(
+                "MuscleGroup non trovato con id: " + dto.getMuscleGroup().getId()));
+        machine.setMuscleGroup(mg);
+    }
         }
 
         
