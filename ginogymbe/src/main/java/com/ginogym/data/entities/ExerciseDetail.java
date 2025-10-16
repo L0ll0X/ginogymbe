@@ -32,7 +32,7 @@ public class ExerciseDetail {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="exercise_id")
-    private Exercise exercises;
+    private Exercise exercise;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="days_of_week_id")

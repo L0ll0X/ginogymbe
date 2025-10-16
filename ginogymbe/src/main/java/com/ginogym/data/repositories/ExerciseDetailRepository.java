@@ -9,6 +9,6 @@ public interface ExerciseDetailRepository extends JpaRepository<ExerciseDetail, 
 
      Page<ExerciseDetail>findByExercise_Id(Long exerciseId,Pageable pageable);
 
-     Page<ExerciseDetail>findByDayOfWeek_Id(Long dayOfWeekId,Pageable pageable);
+     Page<ExerciseDetail>findByDaysOfWeek_Id(Long dayOfWeekId,Pageable pageable);
      
 }

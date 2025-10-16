@@ -47,7 +47,7 @@ public class ExerciseDetailServiceImpl implements ExerciseDetailService {
 
     @Override
     public Page<ExerciseDetailDTO> getExerciseDetailByDayOfWeek(Long dayOfWeekId, Pageable pageable) {
-        Page page =exerciseDetailRepository.findByDayOfWeek_Id(dayOfWeekId, pageable);
+        Page page =exerciseDetailRepository.findByDaysOfWeek_Id(dayOfWeekId, pageable);
         List<ExerciseDetailDTO> paginatedItems = page.getContent().stream().map(x -> exerciseDetailMapper.toDTO((ExerciseDetail)x)).toList();
          return new PageImpl<>(
             paginatedItems,       

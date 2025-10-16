@@ -27,6 +27,6 @@ public class DayOfWeek {
 
     private String descrizione;
 
-    @OneToMany(mappedBy = "dayOfWeek", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "daysOfWeek", cascade = CascadeType.ALL)
     private List<ExerciseDetail> exerciseDetails;
 }
