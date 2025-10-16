@@ -11,5 +11,5 @@ public class MachineDTO {
     private Long id;
     private String name;
     private String description;
-    private String muscleGroup;
+   private MuscleGroupDTO muscleGroup;
 }
