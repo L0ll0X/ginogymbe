@@ -2,7 +2,6 @@ package com.ginogym.business.DTOs;
 
 import lombok.*;
 
-import java.util.Set;
 
 @Data
 @NoArgsConstructor

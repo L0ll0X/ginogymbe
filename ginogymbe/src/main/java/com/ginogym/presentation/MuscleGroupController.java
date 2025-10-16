@@ -14,6 +14,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping ("/api/musclegroups")
+@CrossOrigin(origins = "http://localhost:4200") 
 @RequiredArgsConstructor
 public class MuscleGroupController {
     
@@ -37,7 +39,7 @@ public class MuscleGroupController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@RequestParam Long id) {
+    public ResponseEntity<?> getById(@PathVariable Long id) {
         Optional<MuscleGroupDTO> muscleGroup;
         try {
            muscleGroup  = muscleGroupService.getMuscleGroupById(id);
