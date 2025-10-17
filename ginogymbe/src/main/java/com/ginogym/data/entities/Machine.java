@@ -19,11 +19,7 @@ public class Machine {
 
     private String name;          // e.g. "Leg Press"
     private String description;   // breve descrizione
-    
-    @ManyToOne
-    @JoinColumn(name = "muscle_group_id")
-    @JsonIgnore
-    private MuscleGroup muscleGroup;
+
 
     @OneToMany(mappedBy = "machine", cascade = CascadeType.ALL)
     private List<Exercise> exercises;
