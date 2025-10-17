@@ -10,15 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.ginogym.business.ExerciseService;
 import com.ginogym.business.DTOs.ExerciseDTO;
-import com.ginogym.business.DTOs.MachineDTO;
-import com.ginogym.business.DTOs.MuscleGroupDTO;
 import com.ginogym.data.entities.Exercise;
-import com.ginogym.data.entities.Machine;
-import com.ginogym.data.entities.MuscleGroup;
 import com.ginogym.data.repositories.ExerciseRepository;
 import com.ginogym.mapper.ExerciseMapper;
-import com.ginogym.presentation.request.CreateExerciseRequest;
-import com.ginogym.presentation.request.ModifyExerciseRequest;
+import com.ginogym.presentation.requests.CreateExerciseRequest;
+import com.ginogym.presentation.requests.ModifyExerciseRequest;
 
 import lombok.RequiredArgsConstructor;
 

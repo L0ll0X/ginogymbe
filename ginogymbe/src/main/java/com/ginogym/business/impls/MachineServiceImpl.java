@@ -12,7 +12,10 @@ import com.ginogym.business.DTOs.MachineDTO;
 import com.ginogym.data.entities.Machine;
 import com.ginogym.data.repositories.MachineRepository;
 import com.ginogym.mapper.MachineMapper;
+import com.ginogym.presentation.requests.CreateMachineRequest;
+import com.ginogym.presentation.requests.ModifyMachineRequest;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -34,28 +37,28 @@ public class MachineServiceImpl implements MachineService {
                 .map(machineMapper::toDTO);
     }
 
-    @Override
-    public Page<MachineDTO> getMachinesByMuscleGroup(String muscleGroupName, Pageable pageable) {
-        Page page = machineRepository.findByMuscleGroup_Name(muscleGroupName, pageable);
-        List<MachineDTO> paginatedItems = page.getContent().stream().map(x -> machineMapper.toDTO((Machine)x)).toList();
-         return new PageImpl<>(
-            paginatedItems,       
-            pageable,             
-            page.getTotalElements() 
-        );       
-    }
+    // @Override
+    // public Page<MachineDTO> getMachinesByMuscleGroup(String muscleGroupName, Pageable pageable) {
+    //     Page page = machineRepository.findByMuscleGroup_Name(muscleGroupName, pageable);
+    //     List<MachineDTO> paginatedItems = page.getContent().stream().map(x -> machineMapper.toDTO((Machine)x)).toList();
+    //      return new PageImpl<>(
+    //         paginatedItems,       
+    //         pageable,             
+    //         page.getTotalElements() 
+    //     );       
+    // }
 
     @Override
-    public MachineDTO createMachine(MachineDTO machineDTO) {
-        Machine machine = machineMapper.toEntity(machineDTO);
+    public MachineDTO createMachine(CreateMachineRequest machineDTO) {
+        Machine machine = machineMapper.requestToEntity(machineDTO);
         Machine saved = machineRepository.save(machine);
         return machineMapper.toDTO(saved);
     }
 
-    public MachineDTO updateMachine(Long id, MachineDTO machineDTO) {
+    public MachineDTO updateMachine(Long id, ModifyMachineRequest machineDTO) {
         Machine existing = machineRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Machine not found"));
-        machineMapper.updateMachineFromDTO(machineDTO, existing);
+        machineMapper.requestUpdateMachineFromDTO(machineDTO, existing);
         return machineMapper.toDTO(machineRepository.save(existing));
     }
 
