@@ -2,27 +2,26 @@ package com.ginogym.presentation;
 
 import java.net.URI;
 import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import com.ginogym.business.MachineService;
-import com.ginogym.business.DTOs.MachineDTO;
-
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import lombok.RequiredArgsConstructor;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ginogym.business.MachineService;
+import com.ginogym.business.DTOs.MachineDTO;
+import com.ginogym.business.DTOs.PaginationResponse;
+import com.ginogym.presentation.requests.CreateMachineRequest;
+import com.ginogym.presentation.requests.ModifyMachineRequest;
+import lombok.RequiredArgsConstructor;
 
 
 @RestController
@@ -35,11 +34,12 @@ public class MachineController {
 
     
     @GetMapping
-    public ResponseEntity<Page<MachineDTO>> getAll(
-            @PageableDefault(page = 0, size = 10, sort = "nome") Pageable pageable) {
+    public ResponseEntity<PaginationResponse<MachineDTO>> getAll(
+            @PageableDefault(page = 0, size = 10, sort = "nme") Pageable pageable) {
 
         Page<MachineDTO> machines = machineService.getAllMachines(pageable);
-        return ResponseEntity.ok(machines);
+        PaginationResponse<MachineDTO> response = new PaginationResponse<>(machines);
+        return ResponseEntity.ok(response);
     }
 
 
@@ -51,14 +51,14 @@ public class MachineController {
     }
 
     @PostMapping
-    public ResponseEntity<MachineDTO> create(@RequestBody MachineDTO dto) {
+    public ResponseEntity<MachineDTO> create(@RequestBody CreateMachineRequest dto) {
         MachineDTO created = machineService.createMachine(dto);
         return ResponseEntity.created(URI.create("/api/machines/" + created.getId()))
                              .body(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MachineDTO> update(@PathVariable Long id, @RequestBody MachineDTO dto) {
+    public ResponseEntity<MachineDTO> update(@PathVariable Long id, @RequestBody ModifyMachineRequest dto) {
         MachineDTO updated = machineService.updateMachine(id, dto);
         return ResponseEntity.ok(updated);
     }
