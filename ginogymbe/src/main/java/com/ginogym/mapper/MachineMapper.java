@@ -24,17 +24,13 @@ public class MachineMapper {
     }
 
    public MachineDTO toDTO(Machine machine) {
-    if (machine == null) return null;
-
-    MachineDTO dto = new MachineDTO();
-    dto.setId(machine.getId());
-    dto.setName(machine.getName());
-    dto.setDescription(machine.getDescription());
-
-    if (machine.getMuscleGroup() != null) {
-        dto.setMuscleGroup(mapper.map(machine.getMuscleGroup(), com.ginogym.business.DTOs.MuscleGroupDTO.class));
+    MachineDTO dto=mapper.map(machine,MachineDTO.class);
+    if (machine.getName() != null) {
+        dto.setName(machine.getName());
     }
-
+    if(machine.getDescription()!=null) {
+        dto.setDescription(machine.getDescription());
+    }
     return dto;
 }
 
