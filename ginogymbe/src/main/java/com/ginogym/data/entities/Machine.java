@@ -22,7 +22,7 @@ public class Machine {
     
     @ManyToOne
     @JoinColumn(name = "muscle_group_id")
-    @JsonIgnore
+   // @JsonIgnore
     private MuscleGroup muscleGroup;
 
     @OneToMany(mappedBy = "machine", cascade = CascadeType.ALL)

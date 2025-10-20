@@ -21,7 +21,7 @@ public class MuscleGroup {
     private String name; // es. "Chest", "Back", "Legs", "Shoulders"
 
     @OneToMany(mappedBy = "muscleGroup", cascade = CascadeType.ALL)
-    @JsonIgnore
+ // @JsonIgnore
     private List<Machine> machines;
 
     @OneToMany(mappedBy = "muscleGroup", cascade = CascadeType.ALL)
