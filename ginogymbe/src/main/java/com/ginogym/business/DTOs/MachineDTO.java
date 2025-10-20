@@ -1,5 +1,7 @@
 package com.ginogym.business.DTOs;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.*;
 
 
@@ -9,7 +11,9 @@ import lombok.*;
 @Builder
 public class MachineDTO {
     private Long id;
+   
     private String name;
+   
     private String description;
     private MuscleGroupDTO muscleGroup;
 }

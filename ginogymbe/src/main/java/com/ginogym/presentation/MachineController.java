@@ -25,8 +25,8 @@ import lombok.RequiredArgsConstructor;
 
 
 @RestController
-@RequestMapping ("/api/machines")
-@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/machines")
+@CrossOrigin(origins = "http://localhost:4200") 
 @RequiredArgsConstructor
 public class MachineController {
 
