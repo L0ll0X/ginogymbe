@@ -31,11 +31,11 @@ public class Exercise {
 
     private String name;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "muscle_group_id")
     private MuscleGroup muscleGroup;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "machine_id")
     private Machine machine;
 

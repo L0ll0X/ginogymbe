@@ -13,7 +13,7 @@ public class ExerciseDTO {
 
     private Long id;
     private String name;
-    private String muscleGrup;
-    private String machine;
+    private MuscleGroupDTO muscleGroup;
+    private MachineDTO machine;
 
 }
