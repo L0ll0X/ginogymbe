@@ -4,7 +4,6 @@ import com.ginogym.business.DTOs.WorkoutPlanDTO;
 import com.ginogym.business.WorkoutPlanService;
 import com.ginogym.data.entities.Exercise;
 import com.ginogym.data.entities.WorkoutPlan;
-import com.ginogym.data.repositories.ExerciseWorkoutPlanRepository;
 import com.ginogym.data.repositories.WorkoutPlanRepository;
 import com.ginogym.mapper.WorkoutPlanMapper;
 
@@ -24,7 +23,7 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
     private final WorkoutPlanMapper workoutPlanMapper;
 
     @Autowired
-    public WorkoutPlanServiceImpl(WorkoutPlanRepository workoutPlanRepository, ExerciseWorkoutPlanRepository exerciseWorkoutPlanRepository, WorkoutPlanMapper workoutPlanMapper) {
+    public WorkoutPlanServiceImpl(WorkoutPlanRepository workoutPlanRepository, exerciseWorkoutPlanRepository exerciseWorkoutPlanRepository, WorkoutPlanMapper workoutPlanMapper) {
         this.workoutPlanRepository = workoutPlanRepository;
         this.exerciseWorkoutPlanRepository = exerciseWorkoutPlanRepository;
         this.workoutPlanMapper = workoutPlanMapper;
