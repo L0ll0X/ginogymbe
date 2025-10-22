@@ -8,5 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WorkoutPlanRepository extends JpaRepository<WorkoutPlan, Long> {
+
     Page<WorkoutPlan> findByUserId(Long userId, Pageable pageable);
+
 }

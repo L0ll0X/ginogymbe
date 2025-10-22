@@ -38,7 +38,7 @@ public class ExerciseController {
     @GetMapping
     public ResponseEntity<Page<ExerciseDTO>> getAll(Pageable pageable) {
         Page<ExerciseDTO> exercise = exerciseService.getAllExercises(pageable);
-         PaginationResponse<ExerciseDTO> response = new PaginationResponse<>(exercise);
+        PaginationResponse<ExerciseDTO> response = new PaginationResponse<>(exercise);
         return ResponseEntity.ok(exercise);
     }
     
