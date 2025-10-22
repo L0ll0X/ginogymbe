@@ -58,7 +58,7 @@ public class ExerciseServiceImpl implements ExerciseService{
     // Usa il mapping integrato di Page
     return exerciseRepository.findByMuscleGroupNameWithRelations(muscleGroupName, pageable)
            .map(mapper::toDTO); // Ritorna direttamente Page<ExerciseDTO>
-}
+    }
 
     @Override
     public Page<ExerciseDTO> getExerciseByMachine(String machineName, Pageable pageable) {
@@ -66,7 +66,7 @@ public class ExerciseServiceImpl implements ExerciseService{
     return exerciseRepository. findByMachineNameWithRelations(machineName, pageable)
            // Usa la comoda funzione map() di Spring Data Page
            .map(mapper::toDTO); 
-}
+    }
 
     @Override
     public ExerciseDTO createExercise(CreateExerciseRequest exerciseRequest) {
@@ -92,9 +92,10 @@ public class ExerciseServiceImpl implements ExerciseService{
     }
     exerciseRepository.save(exercise); 
     return mapper.toDTO(exercise);
-}
+    }
+
     @Override
-public ExerciseDTO updateExercise(Long id, ModifyExerciseRequest exerciseRequest) {
+    public ExerciseDTO updateExercise(Long id, ModifyExerciseRequest exerciseRequest) {
     Exercise esercizioDaModificare = exerciseRepository.findById(id)
         .orElseThrow(() -> new EntityNotFoundException("Exercise not found with ID: " + id));
     Long muscleGroupId = exerciseRequest.getMuscleGroupId();
@@ -114,7 +115,7 @@ public ExerciseDTO updateExercise(Long id, ModifyExerciseRequest exerciseRequest
     mapper.requestUpdateExerciseFromDTO(exerciseRequest, esercizioDaModificare, muscleGroup, machine);
     exerciseRepository.save(esercizioDaModificare); 
     return mapper.toDTO(esercizioDaModificare);
-}
+    }
 
     @Override
     public void deleteExercise(Long id) {
