@@ -42,7 +42,9 @@ public class ExerciseMapper {
     }
     
     public Exercise requestToEntity(CreateExerciseRequest request) {
-        return mapper.map(request, Exercise.class);
+        Exercise e = mapper.map(request, Exercise.class);
+        e.setId(null);
+        return e;
     }
     
     public void updateExerciseFromDTO(ExerciseDTO dto, Exercise exercise) {
