@@ -1,72 +1,77 @@
- package com.ginogym.presentation;
+package com.ginogym.presentation;
 
+import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.ginogym.business.WorkoutPlanService;
+import com.ginogym.business.DTOs.ExerciseDTO;
 import com.ginogym.business.DTOs.WorkoutPlanDTO;
-import com.ginogym.data.entities.WorkoutPlan;
+import com.ginogym.data.entities.Exercise;
+import com.ginogym.mapper.ExerciseMapper;
 import com.ginogym.mapper.WorkoutPlanMapper;
-import com.ginogym.data.repositories.WorkoutPlanRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/workoutplans")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequiredArgsConstructor
 public class WorkoutPlanController {
 
-    private final WorkoutPlanRepository workoutPlanRepository;
-    private final WorkoutPlanMapper workoutPlanMapper;
+    private final WorkoutPlanService workoutPlanService;
+    private final ExerciseMapper exerciseMapper;
 
-    public WorkoutPlanController(WorkoutPlanRepository workoutPlanRepository, WorkoutPlanMapper workoutPlanMapper) {
-        this.workoutPlanRepository = workoutPlanRepository;
-        this.workoutPlanMapper = workoutPlanMapper;
-    }
-
-   
     @GetMapping
-    public ResponseEntity<List<WorkoutPlanDTO>> getAllWorkoutPlans() {
-        List<WorkoutPlanDTO> dtos = workoutPlanRepository.findAll()
-                .stream()
-                .map(workoutPlanMapper::toDTO)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(dtos);
+    public ResponseEntity<Page<WorkoutPlanDTO>> getAll(Pageable pageable) {
+        Page<WorkoutPlanDTO> workoutPlan = workoutPlanService.getAllWorkoutPlans(pageable);
+        return ResponseEntity.ok(workoutPlan);
     }
 
-   
     @GetMapping("/{id}")
-    public ResponseEntity<WorkoutPlanDTO> getWorkoutPlanById(@PathVariable Long id) {
-        return workoutPlanRepository.findById(id)
-                .map(workoutPlanMapper::toDTO)
-                .map(ResponseEntity::ok)
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        Optional<WorkoutPlanDTO> workoutPlan;
+        try {
+            workoutPlan = workoutPlanService.getWorkoutPlanById(id);
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+        return workoutPlan.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-   
+    @GetMapping("/plan-exercises/{id}")
+    public ResponseEntity<List<ExerciseDTO>> getExercisesByWorkoutPlan(@PathVariable Long id) {
+        List<ExerciseDTO> exercises = workoutPlanService.getExercisesByWorkoutPlan(id)
+                .stream()
+                .map(exerciseMapper::toDTO) // se hai un mapper
+                .toList();
+
+        return ResponseEntity.ok(exercises);
+    }
+
     @PostMapping
     public ResponseEntity<WorkoutPlanDTO> createWorkoutPlan(@RequestBody WorkoutPlanDTO dto) {
-        WorkoutPlan workoutPlan = workoutPlanMapper.toEntity(dto);
-        WorkoutPlan saved = workoutPlanRepository.save(workoutPlan);
-        return ResponseEntity.ok(workoutPlanMapper.toDTO(saved));
+        WorkoutPlanDTO created = workoutPlanService.createWorkoutPlan(dto);
+        return ResponseEntity.created(URI.create("/api/workoutPlans/" + created.getId())).body(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<WorkoutPlanDTO> updateWorkoutPlan(@PathVariable Long id,
-                                                            @RequestBody WorkoutPlanDTO dto) {
-        return workoutPlanRepository.findById(id).map(existing -> {
-            workoutPlanMapper.updateWorkoutPlanFromDTO(dto, existing);
-            WorkoutPlan updated = workoutPlanRepository.save(existing);
-            return ResponseEntity.ok(workoutPlanMapper.toDTO(updated));
-        }).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<WorkoutPlanDTO> update(@PathVariable Long id, @RequestBody WorkoutPlanDTO dto) {
+        WorkoutPlanDTO updated = workoutPlanService.updateWorkoutPlan(id, dto);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteWorkoutPlan(@PathVariable Long id) {
-        return workoutPlanRepository.findById(id).map(existing -> {
-            workoutPlanRepository.delete(existing);
-            return ResponseEntity.ok().<Void>build();
-        }).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        workoutPlanService.deleteWorkoutPlan(id);
+        return ResponseEntity.noContent().build();
     }
-}
 
- 
+}
