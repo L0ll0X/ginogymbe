@@ -15,7 +15,6 @@ import com.ginogym.mapper.MachineMapper;
 import com.ginogym.presentation.requests.CreateMachineRequest;
 import com.ginogym.presentation.requests.ModifyMachineRequest;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ginogym.business.ExerciseDetailService;
 import com.ginogym.business.DTOs.ExerciseDetailDTO;
 import com.ginogym.business.DTOs.MachineDTO;
+import com.ginogym.business.DTOs.PaginationResponse;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/api/exerciseDetails")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class ExerciseDetailController {
 
@@ -33,6 +36,7 @@ public class ExerciseDetailController {
     @GetMapping
     public ResponseEntity<Page<ExerciseDetailDTO>> getAll(Pageable pageable) {
         Page<ExerciseDetailDTO> exerciseDetail = exerciseDetailService.getAllExerciseDetails(pageable);
+         PaginationResponse<ExerciseDetailDTO> response = new PaginationResponse<>(exerciseDetail);
         return ResponseEntity.ok(exerciseDetail);
     }
 
