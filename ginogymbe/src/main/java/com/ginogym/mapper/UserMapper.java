@@ -31,10 +31,11 @@ public class UserMapper {
         return mapper.map(dto, User.class);
     }
 public void updateUserFromDTO(UserDTO dto, User user) {
-    if (dto.getFirstName() != null) user.setFirstName(dto.getFirstName());
-    if (dto.getLastName() != null) user.setLastName(dto.getLastName());
     if (dto.getUsername() != null) user.setUsername(dto.getUsername());
     if (dto.getEmail() != null) user.setEmail(dto.getEmail());
+    if (dto.getRoles() != null) {
+        
+    }
     }
 }
 
