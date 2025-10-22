@@ -56,14 +56,14 @@ public class ExerciseServiceImpl implements ExerciseService{
     @Override
     public Page<ExerciseDTO> getExerciseByMuscleGroup(String muscleGroupName, Pageable pageable) {
     return exerciseRepository.findByMuscleGroupNameWithRelations(muscleGroupName, pageable)
-           .map(mapper::toDTO); 
-}
+           .map(mapper::toDTO); // Ritorna direttamente Page<ExerciseDTO>
+    }
 
     @Override
     public Page<ExerciseDTO> getExerciseByMachine(String machineName, Pageable pageable) {
     return exerciseRepository. findByMachineNameWithRelations(machineName, pageable)
            .map(mapper::toDTO); 
-}
+    }
 
     @Override
     public ExerciseDTO createExercise(CreateExerciseRequest exerciseRequest) {
@@ -89,7 +89,8 @@ public class ExerciseServiceImpl implements ExerciseService{
     }
     exerciseRepository.save(exercise); 
     return mapper.toDTO(exercise);
-}
+    }
+
     @Override
     public ExerciseDTO updateExercise(Long id, ModifyExerciseRequest exerciseRequest) {
         Exercise esercizioDaModificare = exerciseRepository.findById(id)
@@ -111,7 +112,7 @@ public class ExerciseServiceImpl implements ExerciseService{
     mapper.requestUpdateExerciseFromDTO(exerciseRequest, esercizioDaModificare, muscleGroup, machine);
     exerciseRepository.save(esercizioDaModificare); 
     return mapper.toDTO(esercizioDaModificare);
-}
+    }
 
     @Override
     public void deleteExercise(Long id) {
