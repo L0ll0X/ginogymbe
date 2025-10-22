@@ -2,10 +2,12 @@ package com.ginogym.data.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.List;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "workout_plan")
+@Table(name = "workoutPlan")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,5 +24,8 @@ public class WorkoutPlan {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id") 
     private User user;
+
+    @ManyToMany(mappedBy = "workoutPlans")
+    private Set<Exercise> exercises = new HashSet<>();
     
 }
