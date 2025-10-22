@@ -1,6 +1,8 @@
 package com.ginogym.data.entities;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -9,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -41,5 +45,13 @@ public class Exercise {
 
     @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
     private List<ExerciseDetail> exerciseDetails;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "exercises_workoutPlan",
+        joinColumns = @JoinColumn(name = "exercise_id"),
+        inverseJoinColumns = @JoinColumn(name = "workoutPlan_id")
+    )
+    private Set<WorkoutPlan> workoutPlans = new HashSet<>();
     
 }

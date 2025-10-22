@@ -2,6 +2,7 @@ package com.ginogym.business.impls;
 
 import com.ginogym.business.DTOs.WorkoutPlanDTO;
 import com.ginogym.business.WorkoutPlanService;
+import com.ginogym.data.entities.Exercise;
 import com.ginogym.data.entities.WorkoutPlan;
 import com.ginogym.data.repositories.WorkoutPlanRepository;
 import com.ginogym.mapper.WorkoutPlanMapper;
@@ -11,18 +12,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class WorkoutPlanServiceImpl implements WorkoutPlanService {
 
     private final WorkoutPlanRepository workoutPlanRepository;
+    private final ExerciseWorkoutPlanRepository exerciseWorkoutPlanRepository;
     private final WorkoutPlanMapper workoutPlanMapper;
 
     @Autowired
-    public WorkoutPlanServiceImpl(WorkoutPlanRepository workoutPlanRepository,
-                                  WorkoutPlanMapper workoutPlanMapper) {
+    public WorkoutPlanServiceImpl(WorkoutPlanRepository workoutPlanRepository, exerciseWorkoutPlanRepository exerciseWorkoutPlanRepository, WorkoutPlanMapper workoutPlanMapper) {
         this.workoutPlanRepository = workoutPlanRepository;
+        this.exerciseWorkoutPlanRepository = exerciseWorkoutPlanRepository;
         this.workoutPlanMapper = workoutPlanMapper;
     }
 
@@ -30,6 +33,11 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
     public Page<WorkoutPlanDTO> getAllWorkoutPlans(Pageable pageable) {
         return workoutPlanRepository.findAll(pageable)
                 .map(workoutPlanMapper::toDTO);
+    }
+
+    @Override
+    public List<Exercise> getExercisesByWorkoutPlan(Long workoutPlanId) {
+        return exerciseWorkoutPlanRepository.findExercisesByWorkoutPlanId(workoutPlanId);
     }
 
     @Override
