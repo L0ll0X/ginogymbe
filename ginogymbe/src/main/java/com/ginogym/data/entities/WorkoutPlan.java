@@ -22,7 +22,5 @@ public class WorkoutPlan {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id") 
     private User user;
-
-    @OneToMany(mappedBy = "workoutPlan", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<ExerciseDetail> exerciseDetails;
+    
 }
