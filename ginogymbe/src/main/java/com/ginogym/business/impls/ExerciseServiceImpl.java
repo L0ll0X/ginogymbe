@@ -55,16 +55,13 @@ public class ExerciseServiceImpl implements ExerciseService{
 
     @Override
     public Page<ExerciseDTO> getExerciseByMuscleGroup(String muscleGroupName, Pageable pageable) {
-    // Usa il mapping integrato di Page
     return exerciseRepository.findByMuscleGroupNameWithRelations(muscleGroupName, pageable)
-           .map(mapper::toDTO); // Ritorna direttamente Page<ExerciseDTO>
+           .map(mapper::toDTO); 
 }
 
     @Override
     public Page<ExerciseDTO> getExerciseByMachine(String machineName, Pageable pageable) {
-    // Chiama il metodo ottimizzato con JOIN FETCH (ad esempio)
     return exerciseRepository. findByMachineNameWithRelations(machineName, pageable)
-           // Usa la comoda funzione map() di Spring Data Page
            .map(mapper::toDTO); 
 }
 
@@ -94,23 +91,23 @@ public class ExerciseServiceImpl implements ExerciseService{
     return mapper.toDTO(exercise);
 }
     @Override
-public ExerciseDTO updateExercise(Long id, ModifyExerciseRequest exerciseRequest) {
-    Exercise esercizioDaModificare = exerciseRepository.findById(id)
-        .orElseThrow(() -> new EntityNotFoundException("Exercise not found with ID: " + id));
-    Long muscleGroupId = exerciseRequest.getMuscleGroupId();
-    MuscleGroup muscleGroup = null;
-    if (muscleGroupId != null && muscleGroupId > 0) {
-        muscleGroup = muscleGroupRepository.getReferenceById(muscleGroupId);
-    } else if (muscleGroupId != null && muscleGroupId == 0) {
-        throw new IllegalArgumentException("MuscleGroup ID cannot be 0.");
-    }
-    Long machineId = exerciseRequest.getMachineId();
-    Machine machine = null;
-    if (machineId != null && machineId > 0) {
-        machine = machineRepository.getReferenceById(machineId);
-    } else if (machineId != null && machineId == 0) {
-        throw new IllegalArgumentException("Machine ID cannot be 0.");
-    }
+    public ExerciseDTO updateExercise(Long id, ModifyExerciseRequest exerciseRequest) {
+        Exercise esercizioDaModificare = exerciseRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Exercise not found with ID: " + id));
+        Long muscleGroupId = exerciseRequest.getMuscleGroupId();
+         MuscleGroup muscleGroup = null;
+        if (muscleGroupId != null && muscleGroupId > 0) {
+            muscleGroup = muscleGroupRepository.getReferenceById(muscleGroupId);
+        } else if (muscleGroupId != null && muscleGroupId == 0) {
+            throw new IllegalArgumentException("MuscleGroup ID cannot be 0.");
+        }
+        Long machineId = exerciseRequest.getMachineId();
+        Machine machine = null;
+        if (machineId != null && machineId > 0) {
+            machine = machineRepository.getReferenceById(machineId);
+        } else if (machineId != null && machineId == 0) {
+            throw new IllegalArgumentException("Machine ID cannot be 0.");
+        }
     mapper.requestUpdateExerciseFromDTO(exerciseRequest, esercizioDaModificare, muscleGroup, machine);
     exerciseRepository.save(esercizioDaModificare); 
     return mapper.toDTO(esercizioDaModificare);
