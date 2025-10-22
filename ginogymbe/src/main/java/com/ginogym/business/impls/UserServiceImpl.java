@@ -25,7 +25,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<UserDTO> getAllUsers(Pageable pageable) {
-        return userRepository.findAll(pageable)
+        var c = userRepository.findAll(pageable);
+        return c
                 .map(mapper::toDTO);
     }
 
