@@ -46,7 +46,7 @@ public class WorkoutPlanController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/plan-exercises/{id}")
+    @GetMapping("/workoutplan-exercises/{id}")
     public ResponseEntity<List<ExerciseDTO>> getExercisesByWorkoutPlan(@PathVariable Long id) {
         List<ExerciseDTO> exercises = workoutPlanService.getExercisesByWorkoutPlan(id)
                 .stream()
