@@ -9,15 +9,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.ginogym.data.entities.Exercise;
+import com.ginogym.data.entities.Machine;
 
 public interface ExerciseRepository extends JpaRepository<Exercise, Long>{
 
     Optional<Exercise> findByName(String name);
-
-    // Page<Exercise> findByMuscleGroup_Name(String muscleGroupName, Pageable pageable);
-
-    // Page<Exercise> findByMachine_Name(String machineName, Pageable pageable);
-
+    Optional< Exercise>findById(Long id);
 
     @Query("SELECT e FROM Exercise e JOIN FETCH e.muscleGroup JOIN FETCH e.machine")
     Page<Exercise> findAllWithRelations(Pageable pageable);

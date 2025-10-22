@@ -43,7 +43,7 @@ public class ExerciseController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@RequestParam Long id) {
+    public ResponseEntity<?> getById(@PathVariable Long id) {
         Optional<ExerciseDTO> exercise;
         try {
            exercise  = exerciseService.getExerciseById(id);

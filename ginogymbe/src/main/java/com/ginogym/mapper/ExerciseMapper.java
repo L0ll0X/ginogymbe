@@ -9,10 +9,9 @@ import com.ginogym.business.DTOs.MuscleGroupDTO;
 import com.ginogym.data.entities.Exercise;
 import com.ginogym.data.entities.Machine;
 import com.ginogym.data.entities.MuscleGroup;
-import com.ginogym.data.repositories.MuscleGroupRepository;
 import com.ginogym.presentation.requests.CreateExerciseRequest;
 import com.ginogym.presentation.requests.ModifyExerciseRequest;
-import com.ginogym.presentation.requests.ModifyMachineRequest;
+
 
 @Component
 public class ExerciseMapper {
@@ -42,7 +41,9 @@ public class ExerciseMapper {
     }
     
     public Exercise requestToEntity(CreateExerciseRequest request) {
-        return mapper.map(request, Exercise.class);
+        Exercise e = mapper.map(request, Exercise.class);
+        e.setId(null);
+        return e;
     }
     
     public void updateExerciseFromDTO(ExerciseDTO dto, Exercise exercise) {
