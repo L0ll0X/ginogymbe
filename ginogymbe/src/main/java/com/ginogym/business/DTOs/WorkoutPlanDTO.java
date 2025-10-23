@@ -14,4 +14,3 @@ public class WorkoutPlanDTO {
     private String endDate;
 
 }
-
