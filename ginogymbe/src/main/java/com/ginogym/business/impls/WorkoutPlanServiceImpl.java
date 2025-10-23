@@ -29,7 +29,10 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
     private final ExerciseWorkoutPlanRepository exerciseWorkoutPlanRepository;
     private final WorkoutPlanMapper workoutPlanMapper;
 
+<<<<<<< HEAD
     @Autowired
+=======
+>>>>>>> develop_luca
     public WorkoutPlanServiceImpl(WorkoutPlanRepository workoutPlanRepository, ExerciseWorkoutPlanRepository exerciseWorkoutPlanRepository, WorkoutPlanMapper workoutPlanMapper) {
         this.workoutPlanRepository = workoutPlanRepository;
         this.exerciseWorkoutPlanRepository = exerciseWorkoutPlanRepository;
