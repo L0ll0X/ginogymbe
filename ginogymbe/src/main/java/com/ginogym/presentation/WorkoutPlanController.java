@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import com.ginogym.business.WorkoutPlanService;
 import com.ginogym.business.DTOs.ExerciseDTO;
 import com.ginogym.business.DTOs.WorkoutPlanDTO;
-import com.ginogym.data.entities.Exercise;
 import com.ginogym.mapper.ExerciseMapper;
-import com.ginogym.mapper.WorkoutPlanMapper;
 
 import lombok.RequiredArgsConstructor;
 
