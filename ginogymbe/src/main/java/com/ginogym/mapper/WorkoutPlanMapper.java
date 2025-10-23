@@ -1,13 +1,12 @@
 package com.ginogym.mapper;
 
-import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-
 import com.ginogym.business.DTOs.WorkoutPlanDTO;
-import com.ginogym.data.entities.ExerciseDetail;
+import com.ginogym.data.entities.Exercise;
 import com.ginogym.data.entities.WorkoutPlan;
+import com.ginogym.presentation.requests.CreateWorkoutPlanRequest;
+import com.ginogym.presentation.requests.ModifyWorkoutPlanRequest;
 
 @Component
 public class WorkoutPlanMapper {
@@ -18,17 +17,15 @@ public class WorkoutPlanMapper {
         this.mapper = mapper;
     }
 
-
-
-
     public WorkoutPlanDTO toDTO(WorkoutPlan workoutPlan) {
         WorkoutPlanDTO dto = mapper.map(workoutPlan, WorkoutPlanDTO.class);
-        if (workoutPlan.getExerciseDetails() != null) {
-            dto.setExerciseDetails(workoutPlan.getExerciseDetails().stream()
-                    .map(ed -> ed.getId()) 
-                    .collect(Collectors.toList()));
+        if (workoutPlan.getStartDate() != null) {
+            dto.setStartDate(workoutPlan.getStartDate());
         }
-        return dto;
+        if (workoutPlan.getEndDate() != null) {
+            dto.setEndDate(workoutPlan.getEndDate());
+        }
+          return dto;
     }
 
    
@@ -36,19 +33,20 @@ public class WorkoutPlanMapper {
         return mapper.map(dto, WorkoutPlan.class);
     }
 
-    
-    public void updateWorkoutPlanFromDTO(WorkoutPlanDTO dto, WorkoutPlan workoutPlan) {
-        if (dto.getStartDate() != null) workoutPlan.setStartDate(dto.getStartDate());
-        if (dto.getStartDate() != null) workoutPlan.setEndDate(dto.getEndDate());
-        if (dto.getExerciseDetails() != null) {
-                workoutPlan.getExerciseDetails().clear();
-            for (Long edId : dto.getExerciseDetails()) {
-                ExerciseDetail ed = new ExerciseDetail();
-                ed.setId(edId);
-                ed.setWorkoutPlan(workoutPlan); 
-                workoutPlan.getExerciseDetails().add(ed);
-            }
-        }
+    public  WorkoutPlan requestToEntity(CreateWorkoutPlanRequest request) {
+        WorkoutPlan w = mapper.map(request, WorkoutPlan.class);
+        w.setId(null);
+        return w;
     }
+
+ public void requestUpdateWorkoutPlanFromDTO(ModifyWorkoutPlanRequest request, WorkoutPlan workoutPlan) {
+        if (request.getStartDate() != null) {
+        workoutPlan.setStartDate(request.getStartDate());
+    }
+       if (request.getEndDate() != null) {
+        workoutPlan.setEndDate(request.getEndDate());
+    }
+    }   
+
 }  
  

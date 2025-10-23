@@ -13,6 +13,4 @@ public class WorkoutPlanDTO {
     private String startDate;
     private String endDate;
 
-    private List<Long> exerciseDetails;
 }
-
