@@ -3,18 +3,17 @@ package com.ginogym.presentation;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.ginogym.business.WorkoutPlanService;
 import com.ginogym.business.DTOs.ExerciseDTO;
+import com.ginogym.business.DTOs.PaginationResponse;
 import com.ginogym.business.DTOs.WorkoutPlanDTO;
-import com.ginogym.data.entities.Exercise;
 import com.ginogym.mapper.ExerciseMapper;
-import com.ginogym.mapper.WorkoutPlanMapper;
+import com.ginogym.presentation.requests.CreateWorkoutPlanRequest;
+import com.ginogym.presentation.requests.ModifyWorkoutPlanRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +29,7 @@ public class WorkoutPlanController {
     @GetMapping
     public ResponseEntity<Page<WorkoutPlanDTO>> getAll(Pageable pageable) {
         Page<WorkoutPlanDTO> workoutPlan = workoutPlanService.getAllWorkoutPlans(pageable);
+        PaginationResponse<WorkoutPlanDTO> response = new PaginationResponse<>(workoutPlan);
         return ResponseEntity.ok(workoutPlan);
     }
 
@@ -57,13 +57,13 @@ public class WorkoutPlanController {
     }
 
     @PostMapping
-    public ResponseEntity<WorkoutPlanDTO> createWorkoutPlan(@RequestBody WorkoutPlanDTO dto) {
+    public ResponseEntity<WorkoutPlanDTO> createWorkoutPlan(@RequestBody CreateWorkoutPlanRequest dto) {
         WorkoutPlanDTO created = workoutPlanService.createWorkoutPlan(dto);
         return ResponseEntity.created(URI.create("/api/workoutPlans/" + created.getId())).body(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<WorkoutPlanDTO> update(@PathVariable Long id, @RequestBody WorkoutPlanDTO dto) {
+    public ResponseEntity<WorkoutPlanDTO> update(@PathVariable Long id, @RequestBody ModifyWorkoutPlanRequest dto) {
         WorkoutPlanDTO updated = workoutPlanService.updateWorkoutPlan(id, dto);
         return ResponseEntity.ok(updated);
     }
