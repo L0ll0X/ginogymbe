@@ -35,7 +35,7 @@ public class MachineController {
     
     @GetMapping
     public ResponseEntity<PaginationResponse<MachineDTO>> getAll(
-            @PageableDefault(page = 0, size = 10, sort = "nme") Pageable pageable) {
+            @PageableDefault(page = 0, size = 10, sort = "name") Pageable pageable) {
 
         Page<MachineDTO> machines = machineService.getAllMachines(pageable);
         PaginationResponse<MachineDTO> response = new PaginationResponse<>(machines);

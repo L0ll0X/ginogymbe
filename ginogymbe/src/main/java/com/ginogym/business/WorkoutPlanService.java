@@ -2,6 +2,8 @@ package com.ginogym.business;
 
 import com.ginogym.business.DTOs.WorkoutPlanDTO;
 import com.ginogym.data.entities.Exercise;
+import com.ginogym.presentation.requests.CreateWorkoutPlanRequest;
+import com.ginogym.presentation.requests.ModifyWorkoutPlanRequest;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,9 +21,9 @@ public interface WorkoutPlanService {
 
     Page<WorkoutPlanDTO> getWorkoutPlansByUserId(Long userId, Pageable pageable);
 
-    WorkoutPlanDTO createWorkoutPlan(WorkoutPlanDTO dto);
+    WorkoutPlanDTO createWorkoutPlan(CreateWorkoutPlanRequest workoutPlanDTO);
 
-    WorkoutPlanDTO updateWorkoutPlan(Long id, WorkoutPlanDTO dto);
+    WorkoutPlanDTO updateWorkoutPlan(Long id, ModifyWorkoutPlanRequest workoutPlanDTO);
 
     void deleteWorkoutPlan(Long id);
 }

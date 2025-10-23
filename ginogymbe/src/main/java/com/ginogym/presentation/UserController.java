@@ -53,7 +53,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<UserDTO>> getUsers(  @PageableDefault(page = 0, size = 10, sort = "nme") Pageable pageable) {
+    public ResponseEntity<Page<UserDTO>> getUsers(  @PageableDefault(page = 0, size = 10, sort = "name") Pageable pageable) {
     Page<UserDTO> sers = userService.getAllUsers(pageable); 
     return ResponseEntity.ok(sers);
 }
