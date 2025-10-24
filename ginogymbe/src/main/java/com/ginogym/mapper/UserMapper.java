@@ -35,6 +35,7 @@ public class UserMapper {
     if (dto.getUsername() != null) user.setUsername(dto.getUsername());
     if (dto.getEmail() != null) user.setEmail(dto.getEmail());
     if (dto.getRoles() != null) {
+        
         // gestire la conversione Set<String> -> Set<Role>
     }
 }
