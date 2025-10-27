@@ -48,18 +48,43 @@ public class MachineServiceImpl implements MachineService {
     // }
 
     @Override
-    public MachineDTO createMachine(CreateMachineRequest machineDTO) {
-        Machine machine = machineMapper.requestToEntity(machineDTO);
-        Machine saved = machineRepository.save(machine);
-        return machineMapper.toDTO(saved);
+public MachineDTO createMachine(CreateMachineRequest machineDTO) {
+    Machine machine = machineMapper.requestToEntity(machineDTO);
+
+    // Gestione immagine Base64
+    if (machineDTO.getImageBase64() != null && !machineDTO.getImageBase64().isEmpty()) {
+        try {
+            byte[] imageBytes = java.util.Base64.getDecoder().decode(machineDTO.getImageBase64());
+            machine.setImage(imageBytes); // campo BLOB nella entity
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Errore nella conversione dell'immagine Base64", e);
+        }
     }
 
-    public MachineDTO updateMachine(Long id, ModifyMachineRequest machineDTO) {
-        Machine existing = machineRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Machine not found"));
-        machineMapper.requestUpdateMachineFromDTO(machineDTO, existing);
-        return machineMapper.toDTO(machineRepository.save(existing));
+    Machine saved = machineRepository.save(machine);
+    return machineMapper.toDTO(saved);
+}
+
+@Override
+public MachineDTO updateMachine(Long id, ModifyMachineRequest machineDTO) {
+    Machine existing = machineRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Machine not found"));
+
+    machineMapper.requestUpdateMachineFromDTO(machineDTO, existing);
+
+    // Gestione immagine Base64
+    if (machineDTO.getImageBase64() != null && !machineDTO.getImageBase64().isEmpty()) {
+        try {
+            byte[] imageBytes = java.util.Base64.getDecoder().decode(machineDTO.getImageBase64());
+            existing.setImage(imageBytes);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Errore nella conversione dell'immagine Base64", e);
+        }
     }
+
+    return machineMapper.toDTO(machineRepository.save(existing));
+}
+
 
     @Override
     public void deleteMachine(Long id) {

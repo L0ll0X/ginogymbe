@@ -1,11 +1,13 @@
 package com.ginogym.business.impls;
-
 import com.ginogym.business.DTOs.WorkoutPlanDTO;
 import com.ginogym.business.WorkoutPlanService;
 import com.ginogym.data.entities.Exercise;
 import com.ginogym.data.entities.WorkoutPlan;
+import com.ginogym.data.repositories.ExerciseWorkoutPlanRepository;
 import com.ginogym.data.repositories.WorkoutPlanRepository;
 import com.ginogym.mapper.WorkoutPlanMapper;
+import com.ginogym.presentation.requests.CreateWorkoutPlanRequest;
+import com.ginogym.presentation.requests.ModifyWorkoutPlanRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,7 +25,7 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
     private final WorkoutPlanMapper workoutPlanMapper;
 
     @Autowired
-    public WorkoutPlanServiceImpl(WorkoutPlanRepository workoutPlanRepository, exerciseWorkoutPlanRepository exerciseWorkoutPlanRepository, WorkoutPlanMapper workoutPlanMapper) {
+    public WorkoutPlanServiceImpl(WorkoutPlanRepository workoutPlanRepository, ExerciseWorkoutPlanRepository exerciseWorkoutPlanRepository, WorkoutPlanMapper workoutPlanMapper) {
         this.workoutPlanRepository = workoutPlanRepository;
         this.exerciseWorkoutPlanRepository = exerciseWorkoutPlanRepository;
         this.workoutPlanMapper = workoutPlanMapper;
@@ -53,17 +55,17 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
     }
 
     @Override
-    public WorkoutPlanDTO createWorkoutPlan(WorkoutPlanDTO workoutPlanDTO) {
-        WorkoutPlan workoutPlan = workoutPlanMapper.toEntity(workoutPlanDTO);
+    public WorkoutPlanDTO createWorkoutPlan(CreateWorkoutPlanRequest workoutPlanRequest) {
+        WorkoutPlan workoutPlan = workoutPlanMapper.requestToEntity(workoutPlanRequest);
         WorkoutPlan saved = workoutPlanRepository.save(workoutPlan);
         return workoutPlanMapper.toDTO(saved);
     }
 
   @Override
-public WorkoutPlanDTO updateWorkoutPlan(Long id, WorkoutPlanDTO workoutPlanDTO) {
+public WorkoutPlanDTO updateWorkoutPlan(Long id, ModifyWorkoutPlanRequest workoutPlanRequest) {
     return workoutPlanRepository.findById(id)
             .map(existing -> {
-                workoutPlanMapper.updateWorkoutPlanFromDTO(workoutPlanDTO, existing);
+                workoutPlanMapper.requestUpdateWorkoutPlanFromDTO(workoutPlanRequest, existing);
                 WorkoutPlan updated = workoutPlanRepository.save(existing);
                 return workoutPlanMapper.toDTO(updated);
             }).orElseThrow(() -> new RuntimeException("WorkoutPlan not found with id " + id));
