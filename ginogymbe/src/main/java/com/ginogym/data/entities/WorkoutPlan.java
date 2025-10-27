@@ -21,11 +21,11 @@ public class WorkoutPlan {
     private String startDate; 
     private String endDate; 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id") 
-    private User user;
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "user_id") 
+    // private User user;
 
     @ManyToMany(mappedBy = "workoutPlans")
-    private Set<Exercise> exercises = new HashSet<>();
+    private Set<ExerciseDetail> exerciseDetails = new HashSet<>();
     
 }

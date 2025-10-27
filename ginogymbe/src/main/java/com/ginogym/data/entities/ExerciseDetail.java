@@ -38,9 +38,9 @@ public class ExerciseDetail {
     @JoinColumn(name="days_of_week_id")
     private DayOfWeek daysOfWeek;
 
-    @ManyToOne
-@JoinColumn(name = "workout_plan_id")
-private WorkoutPlan workoutPlan;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "workout_plan_id")
+    private WorkoutPlan workoutPlans;
 
     
 }
