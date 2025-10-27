@@ -1,11 +1,15 @@
 package com.ginogym.security;
 
+import com.ginogym.data.entities.Role;
 import com.ginogym.data.entities.User;
+import com.ginogym.data.repositories.RoleRepository;
 import com.ginogym.data.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -13,6 +17,7 @@ import java.util.stream.Collectors;
 public class CustomUserDetailsService implements UserDetailsService{
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
@@ -36,5 +41,9 @@ public class CustomUserDetailsService implements UserDetailsService{
     public void save(User user) {
         userRepository.save(user);
     }
+
+    public Optional<Role> findRoleByName(String name) {
+    return roleRepository.findRoleByName(name);
+}
 
 }

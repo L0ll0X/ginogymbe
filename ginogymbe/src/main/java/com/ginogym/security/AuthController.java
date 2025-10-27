@@ -1,9 +1,12 @@
 package com.ginogym.security;
 
+import com.ginogym.business.DTOs.UserDTO;
+import com.ginogym.data.entities.Role;
 import com.ginogym.data.entities.User;
 import com.ginogym.data.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +37,40 @@ public class AuthController {
     private final JwtUtils jwtUtils;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user) {
-        if(customUserDetailsService.existsByEmail(user.getEmail())) {
-        return ResponseEntity.badRequest().body("Email già in uso");
+    public ResponseEntity<?> register(@RequestBody UserDTO dto) {
+        if(customUserDetailsService.existsByEmail(dto.getEmail())) {
+            return ResponseEntity.badRequest().body("Email già in uso");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        // Mappa DTO -> Entity
+        User user = new User();
+        user.setUsername(dto.getUsername());
+        user.setEmail(dto.getEmail());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        user.setCellulare(dto.getCellulare());
+
+        // Trasforma nomi dei ruoli in oggetti Role
+        if(dto.getRoles() != null && !dto.getRoles().isEmpty()) {
+            Set<Role> roles = dto.getRoles().stream()
+                .map(roleName -> customUserDetailsService.findRoleByName(roleName)
+                    .orElseThrow(() -> new RuntimeException("Ruolo non trovato: " + roleName)))
+                .collect(Collectors.toSet());
+            user.setRoles(roles);
+        }
+
         customUserDetailsService.save(user);
         return ResponseEntity.ok(user);
     }
+
+    // @PostMapping("/register")
+    // public ResponseEntity<?> register(@RequestBody User user) {
+    //     if(customUserDetailsService.existsByEmail(user.getEmail())) {
+    //     return ResponseEntity.badRequest().body("Email già in uso");
+    //     }
+    //     user.setPassword(passwordEncoder.encode(user.getPassword()));
+    //     customUserDetailsService.save(user);
+    //     return ResponseEntity.ok(user);
+    // }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody AuthRequest request) {
