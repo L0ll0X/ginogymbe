@@ -39,8 +39,7 @@ public class ExerciseDetail {
     private DayOfWeek daysOfWeek;
 
     @ManyToOne
-@JoinColumn(name = "workout_plan_id")
-private WorkoutPlan workoutPlan;
+    @JoinColumn(name = "workout_plan_id")
+    private WorkoutPlan workoutPlan;
 
-    
 }
