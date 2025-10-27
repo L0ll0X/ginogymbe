@@ -17,16 +17,24 @@ public class CustomUserDetailsService implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(usernameOrEmail)
-                .orElse(userRepository.findByEmail(usernameOrEmail)
-                        .orElseThrow(() -> new UsernameNotFoundException("User not found")));
+                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         var authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .map(role -> new SimpleGrantedAuthority("ROLE_" +role.getName()))
                 .collect(Collectors.toList());
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
                 authorities
         );
+    }
+
+    // 🔹 nuovi metodi per gestire il salvataggio e controllo email
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    public void save(User user) {
+        userRepository.save(user);
     }
 
 }
