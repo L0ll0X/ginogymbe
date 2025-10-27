@@ -2,11 +2,11 @@ package com.ginogym.business.impls;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.hibernate.mapping.Set;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -50,8 +50,8 @@ public class UserServiceImpl implements UserService {
     public UserDTO createUser(UserDTO userDTO) {
         User user = mapper.toEntity(userDTO);
            if (userDTO.getRoles() != null && !userDTO.getRoles().isEmpty()) {
-            var roles = userDTO.getRoles().stream()
-                .map(roleName -> roleRepository.findByName(roleName)
+            Set<Role> roles = userDTO.getRoles().stream()
+                .map(roleName -> roleRepository.findRoleByName(roleName)
                     .orElseThrow(() -> new RuntimeException("Ruolo non trovato: " + roleName)))
                 .collect(Collectors.toSet());
             user.setRoles(roles);

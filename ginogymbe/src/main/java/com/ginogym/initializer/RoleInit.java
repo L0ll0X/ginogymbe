@@ -1,6 +1,7 @@
 package com.ginogym.initializer;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import com.ginogym.data.entities.Role;
 import com.ginogym.data.repositories.RoleRepository;
@@ -9,6 +10,7 @@ import com.ginogym.enumeration.RoleEnum;
 
 
 @Component
+@Order(1)
 public class RoleInit implements CommandLineRunner{
 
     private final RoleRepository roleRepository;
