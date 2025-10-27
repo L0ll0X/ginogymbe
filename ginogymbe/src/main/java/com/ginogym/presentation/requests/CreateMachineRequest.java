@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class CreateMachineRequest {
        private String name;
        private String description;
+       private String imageBase64;
 }

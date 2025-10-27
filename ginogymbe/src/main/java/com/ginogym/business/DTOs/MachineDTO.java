@@ -11,6 +11,7 @@ import lombok.*;
 @Builder
 public class MachineDTO {
     private Long id;
+     private String imageBase64;
    
     private String name;
    
