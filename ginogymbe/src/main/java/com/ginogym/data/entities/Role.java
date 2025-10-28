@@ -7,18 +7,22 @@ import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
-    private String name; // es. "ADMIN", "TRAINER", "MEMBER"
+    private String name; // 
 
     @ManyToMany(mappedBy = "roles")
+    @ToString.Exclude // evita loop anche nel toString()
     private Set<User> users = new HashSet<>();
 }

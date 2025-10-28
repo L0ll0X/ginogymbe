@@ -2,6 +2,7 @@ package com.ginogym.business.DTOs;
 
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -12,5 +13,8 @@ public class UserDTO {
     private Long id;
     private String username;
     private String email;
-    private Set<String> roles;
+    private String password;
+    private String cellulare;
+    private Set<String> roles = new HashSet<>();;
 }
+

@@ -2,6 +2,7 @@ package com.ginogym.business.impls;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.ginogym.business.UserService;
 import com.ginogym.business.DTOs.UserDTO;
+import com.ginogym.data.entities.Role;
 import com.ginogym.data.entities.User;
+import com.ginogym.data.repositories.RoleRepository;
 import com.ginogym.data.repositories.UserRepository;
 import com.ginogym.mapper.UserMapper;
 
@@ -21,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor 
 public class UserServiceImpl implements UserService { 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final UserMapper mapper;
 
     @Override
@@ -44,7 +48,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {
-        User user =mapper.toEntity(userDTO);
+        User user = mapper.toEntity(userDTO);
+           if (userDTO.getRoles() != null && !userDTO.getRoles().isEmpty()) {
+            Set<Role> roles = userDTO.getRoles().stream()
+                .map(roleName -> roleRepository.findRoleByName(roleName)
+                    .orElseThrow(() -> new RuntimeException("Ruolo non trovato: " + roleName)))
+                .collect(Collectors.toSet());
+            user.setRoles(roles);
+        }
         User saved = userRepository.save(user);
         return mapper.toDTO(saved);
     }
