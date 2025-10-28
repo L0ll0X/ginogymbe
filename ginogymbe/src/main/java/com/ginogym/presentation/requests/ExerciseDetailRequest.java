@@ -13,10 +13,13 @@ import lombok.NoArgsConstructor;
 @Data    
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateWorkoutPlanRequest {
-    
-    private String startDate; 
-    private String endDate; 
-    
-     private List<ExerciseDetailRequest> exerciseDetails = new ArrayList<>();
+public class ExerciseDetailRequest {
+    private Long serie;
+    private Integer ripetizioni;
+    private Integer recupero;
+    private Integer peso;
+    private Long id;
+    private Long exerciseId;
+    private Long schedaId;
+  
 }

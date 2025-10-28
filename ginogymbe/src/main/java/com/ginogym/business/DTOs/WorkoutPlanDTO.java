@@ -12,5 +12,5 @@ public class WorkoutPlanDTO {
     private Long id;
     private String startDate;
     private String endDate;
-
+    
 }

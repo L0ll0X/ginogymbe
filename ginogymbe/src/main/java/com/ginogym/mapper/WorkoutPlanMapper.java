@@ -35,6 +35,7 @@ public class WorkoutPlanMapper {
 
     public  WorkoutPlan requestToEntity(CreateWorkoutPlanRequest request) {
         WorkoutPlan w = mapper.map(request, WorkoutPlan.class);
+        //popolare le associazioni => esercizio id e dettaglio esercizo 
         w.setId(null);
         return w;
     }
