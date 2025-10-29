@@ -22,4 +22,7 @@ public interface UserService {
     void deleteUser(Long id);
     
     List<UserDTO> getUsersByRole(String roleName);
+
+    Page<UserDTO> getUsersByRole(String roleName, Pageable pageable);
+
 }

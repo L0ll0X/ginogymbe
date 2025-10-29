@@ -52,12 +52,12 @@ public class UserController {
         UserDTO created = userService.createUser(dto);
         return ResponseEntity.ok(created);
     }
-    @PutMapping("/{id}")
-public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO dto) {
-    UserDTO updated = userService.updateUser(id, dto);
-    return ResponseEntity.ok(updated);
-}
 
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO dto) {
+        UserDTO updated = userService.updateUser(id, dto);
+        return ResponseEntity.ok(updated);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
@@ -65,15 +65,22 @@ public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody Us
         return ResponseEntity.noContent().build();
     }
 
+    
     @GetMapping
-    public ResponseEntity<Page<UserDTO>> getUsers(  @PageableDefault(page = 0, size = 10, sort = "name") Pageable pageable) {
-    Page<UserDTO> sers = userService.getAllUsers(pageable); 
-    return ResponseEntity.ok(sers);
-}
+    public ResponseEntity<Page<UserDTO>> getUsers(
+            @RequestParam(required = false) String role,
+            @PageableDefault(page = 0, size = 10, sort = "id") Pageable pageable) {
 
+        Page<UserDTO> users;
 
+        if (role != null && !role.equalsIgnoreCase("Tutti")) {
+            users = userService.getUsersByRole(role, pageable);
+        } else {
+            users = userService.getAllUsers(pageable);
+        }
 
-
+        return ResponseEntity.ok(users);
+    }
 
 }
 

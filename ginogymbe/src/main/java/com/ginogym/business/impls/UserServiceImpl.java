@@ -78,8 +78,19 @@ public class UserServiceImpl implements UserService {
     return users.stream()
                 .map(mapper::toDTO)
                 .collect(Collectors.toList());
-}
+    }
 
+    @Override
+    public Page<UserDTO> getUsersByRole(String roleName, Pageable pageable) {
+        // Se i ruoli nel DB sono tipo "ROLE_ADMIN", normalizza
+        String normalizedRole = roleName.toUpperCase();
+        if (!normalizedRole.startsWith("ROLE_")) {
+            normalizedRole = "ROLE_" + normalizedRole;
+        }
+
+        Page<User> users = userRepository.findDistinctByRoles_Name(normalizedRole, pageable);
+        return users.map(mapper::toDTO);
+    }
 
    
 }

@@ -103,11 +103,7 @@
             <artifactId>jjwt-jackson</artifactId>
             <version>0.11.5</version>
         </dependency>
-<<<<<<< HEAD
-    </dependencies>cdcd
-=======
-    </dependencies>
->>>>>>> develop_luca
+  </dependencies>
     <build>
         <plugins>
             <plugin>
