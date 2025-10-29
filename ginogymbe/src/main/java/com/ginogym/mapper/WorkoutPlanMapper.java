@@ -3,6 +3,8 @@ package com.ginogym.mapper;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.hibernate.Hibernate;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import com.ginogym.business.DTOs.ExerciseDetailDTO;
@@ -20,28 +22,29 @@ public class WorkoutPlanMapper {
     public WorkoutPlanMapper(ModelMapper mapper) {
         this.mapper = mapper;
     }
-
+   
     public WorkoutPlanDTO toDTO(WorkoutPlan workoutPlan) {
         WorkoutPlanDTO dto = mapper.map(workoutPlan, WorkoutPlanDTO.class);
+
         if (workoutPlan.getStartDate() != null) {
             dto.setStartDate(workoutPlan.getStartDate());
         }
         if (workoutPlan.getEndDate() != null) {
             dto.setEndDate(workoutPlan.getEndDate());
         }
-       if (workoutPlan.getExerciseDetails() != null) {
-            dto.setExerciseDetails(mapExerciseDetails(workoutPlan.getExerciseDetails())); 
+
+        if (workoutPlan.getExerciseDetails() != null) {
+            dto.setExerciseDetails(mapExerciseDetails(workoutPlan.getExerciseDetails()));
         }
-          return dto;
+        return dto;
     }
 
-    private List<ExerciseDetailDTO> mapExerciseDetails(Set<ExerciseDetail> details) {
-        return details.stream()
-                .map(detail -> mapper.map(detail, ExerciseDetailDTO.class))
-                .collect(Collectors.toList());
-    }
+private List<ExerciseDetailDTO> mapExerciseDetails(Set<ExerciseDetail> details) {
+    return details.stream()
+            .map(detail -> mapper.map(detail, ExerciseDetailDTO.class))
+            .collect(Collectors.toList());
+}
 
-   
     public WorkoutPlan toEntity(WorkoutPlanDTO dto) {
         return mapper.map(dto, WorkoutPlan.class);
     }

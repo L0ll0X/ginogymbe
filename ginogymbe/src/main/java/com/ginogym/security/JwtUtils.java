@@ -4,11 +4,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Component;
-
-import com.ginogym.data.entities.Role;
-
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

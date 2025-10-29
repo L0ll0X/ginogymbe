@@ -65,30 +65,29 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
     // }
 
  @Override
-    public WorkoutPlanDTO createWorkoutPlan(CreateWorkoutPlanRequest workoutPlanRequest) {
-        WorkoutPlan workoutPlan = workoutPlanMapper.requestToEntity(workoutPlanRequest);
-        WorkoutPlan savedPlan = workoutPlanRepository.save(workoutPlan);
-        Long savedPlanId = savedPlan.getId();
-        List<CreateExerciseDetailRequest> exerciseDetailsRequests = workoutPlanRequest.getExerciseDetails(); 
-          if (exerciseDetailsRequests != null && !exerciseDetailsRequests.isEmpty()) {
+public WorkoutPlanDTO createWorkoutPlan(CreateWorkoutPlanRequest workoutPlanRequest) {
+    WorkoutPlan workoutPlan = workoutPlanMapper.requestToEntity(workoutPlanRequest);
+    WorkoutPlan savedPlan = workoutPlanRepository.save(workoutPlan);
+    List<CreateExerciseDetailRequest> exerciseDetailsRequests = workoutPlanRequest.getExerciseDetails();
+    if (exerciseDetailsRequests != null && !exerciseDetailsRequests.isEmpty()) {
         for (CreateExerciseDetailRequest detailRequest : exerciseDetailsRequests) {
-            Long exerciseId = detailRequest.getIdEsercizio();
-            if (exerciseId == null) {
-                 throw new IllegalArgumentException("Exercise ID cannot be null for an exercise detail in the plan.");
+            Long idEsercizio = detailRequest.getIdEsercizio(); // <-- Usa il metodo corretto del DTO
+            if (idEsercizio == null) {
+                throw new IllegalArgumentException("Exercise ID cannot be null for an exercise detail in the plan.");
             }
-            Exercise exercise = exerciseRepository.findById(exerciseId)
-                    .orElseThrow(() -> new RuntimeException("Exercise not found with id " + exerciseId));                    
+            Exercise exercise = exerciseRepository.findById(idEsercizio) 
+                    .orElseThrow(() -> new RuntimeException("Exercise not found with id " + idEsercizio));
             ExerciseDetail detail = ExerciseDetail.builder()
                     .serie(detailRequest.getSerie())
                     .ripetizioni(detailRequest.getRipetizioni())
                     .recupero(detailRequest.getRecupero())
                     .peso(detailRequest.getPeso())
-                    .exercise(exercise) 
-                    .workoutPlans(savedPlan) 
-                    .build();             
+                    .exercise(exercise)
+                    .workoutPlans(savedPlan)
+                    .build();
             exerciseDetailRepository.save(detail);
         }
-    } 
+    }
     return workoutPlanMapper.toDTO(savedPlan);
 }
 

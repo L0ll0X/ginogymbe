@@ -1,7 +1,5 @@
 package com.ginogym.business.DTOs;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.*;
 
 
