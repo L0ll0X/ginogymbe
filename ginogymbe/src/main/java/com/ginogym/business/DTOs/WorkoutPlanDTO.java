@@ -1,7 +1,8 @@
 package com.ginogym.business.DTOs;
 
-import lombok.*;
 import java.util.List;
+
+import lombok.*;
 
 @Data
 @NoArgsConstructor
@@ -10,7 +11,8 @@ import java.util.List;
 public class WorkoutPlanDTO {
 
     private Long id;
-    private String startDate;
-    private String endDate;
-    
+    private String startDate = "";
+    private String endDate = "";
+    // private UserDTO user;
+    private List<ExerciseDetailDTO> exerciseDetails;
 }

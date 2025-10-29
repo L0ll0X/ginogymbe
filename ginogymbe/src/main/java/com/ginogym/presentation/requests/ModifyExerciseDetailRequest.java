@@ -7,13 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateExerciseRequest {
-
-    private String name;
-    private Long muscleGroupId;
-    private Long machineId;
-
-   
+public class ModifyExerciseDetailRequest extends CreateExerciseDetailRequest{
+    
+    private Long id;
 
 }
-

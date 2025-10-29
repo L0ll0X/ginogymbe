@@ -1,9 +1,13 @@
 package com.ginogym.mapper;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+import com.ginogym.business.DTOs.ExerciseDetailDTO;
 import com.ginogym.business.DTOs.WorkoutPlanDTO;
-import com.ginogym.data.entities.Exercise;
+import com.ginogym.data.entities.ExerciseDetail;
 import com.ginogym.data.entities.WorkoutPlan;
 import com.ginogym.presentation.requests.CreateWorkoutPlanRequest;
 import com.ginogym.presentation.requests.ModifyWorkoutPlanRequest;
@@ -25,7 +29,16 @@ public class WorkoutPlanMapper {
         if (workoutPlan.getEndDate() != null) {
             dto.setEndDate(workoutPlan.getEndDate());
         }
+       if (workoutPlan.getExerciseDetails() != null) {
+            dto.setExerciseDetails(mapExerciseDetails(workoutPlan.getExerciseDetails())); 
+        }
           return dto;
+    }
+
+    private List<ExerciseDetailDTO> mapExerciseDetails(Set<ExerciseDetail> details) {
+        return details.stream()
+                .map(detail -> mapper.map(detail, ExerciseDetailDTO.class))
+                .collect(Collectors.toList());
     }
 
    

@@ -6,20 +6,22 @@ import com.ginogym.business.ExerciseDetailService;
 import com.ginogym.business.DTOs.ExerciseDetailDTO;
 import com.ginogym.business.DTOs.MachineDTO;
 import com.ginogym.business.DTOs.PaginationResponse;
+import com.ginogym.presentation.requests.CreateExerciseDetailRequest;
+import com.ginogym.presentation.requests.CreateExerciseRequest;
+import com.ginogym.presentation.requests.ModifyExerciseDetailRequest;
+import com.ginogym.presentation.requests.ModifyExerciseRequest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.net.URI;
 import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,14 +36,14 @@ public class ExerciseDetailController {
     private final ExerciseDetailService exerciseDetailService;
 
     @GetMapping
-    public ResponseEntity<Page<ExerciseDetailDTO>> getAll(Pageable pageable) {
+    public ResponseEntity<PaginationResponse<ExerciseDetailDTO>> getAll(Pageable pageable) {
         Page<ExerciseDetailDTO> exerciseDetail = exerciseDetailService.getAllExerciseDetails(pageable);
          PaginationResponse<ExerciseDetailDTO> response = new PaginationResponse<>(exerciseDetail);
-        return ResponseEntity.ok(exerciseDetail);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-     public ResponseEntity<?> getById(@RequestParam Long id) {
+     public ResponseEntity<?> getById(@PathVariable Long id) {
         Optional<ExerciseDetailDTO> exerciseDetail;
         try {
            exerciseDetail= exerciseDetailService.getExerciseDetailById(id);     
@@ -52,14 +54,21 @@ public class ExerciseDetailController {
             .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/byworkoutplan/{schedaId}")
+    public ResponseEntity<PaginationResponse<ExerciseDetailDTO>> getByWorkoutPlanId(@PathVariable Long schedaId,Pageable pageable) {
+     Page<ExerciseDetailDTO> detailsPage = exerciseDetailService.getExerciseDetailByWorkoutPlan(schedaId, pageable);
+      PaginationResponse<ExerciseDetailDTO> response = new PaginationResponse<>(detailsPage);
+        return ResponseEntity.ok(response);
+}
+
     @PostMapping
-     public ResponseEntity<ExerciseDetailDTO> create(@RequestBody ExerciseDetailDTO dto) {
+     public ResponseEntity<ExerciseDetailDTO> create(@RequestBody CreateExerciseDetailRequest dto) {
         ExerciseDetailDTO created = exerciseDetailService.createExerciseDetail(dto);
         return ResponseEntity.created(URI.create("/api/exerciseDetails/" + created.getId())).body(created);
     }
 
     @PutMapping("/{id}")
-     public ResponseEntity<ExerciseDetailDTO> update(@PathVariable Long id, @RequestBody ExerciseDetailDTO dto) {
+     public ResponseEntity<ExerciseDetailDTO> update(@PathVariable Long id, @RequestBody ModifyExerciseDetailRequest dto) {
         ExerciseDetailDTO updated= exerciseDetailService.updateExerciseDetail(id, dto);
         return ResponseEntity.ok(updated);
     }

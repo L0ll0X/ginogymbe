@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
+@Builder
 public class ExerciseWorkoutPlanId implements Serializable {
 
     private Long exerciseId;

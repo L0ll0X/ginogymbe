@@ -14,6 +14,7 @@ import com.ginogym.data.entities.Machine;
 public interface ExerciseRepository extends JpaRepository<Exercise, Long>{
 
     Optional<Exercise> findByName(String name);
+    
     Optional< Exercise>findById(Long id);
 
     @Query("SELECT e FROM Exercise e JOIN FETCH e.muscleGroup JOIN FETCH e.machine")

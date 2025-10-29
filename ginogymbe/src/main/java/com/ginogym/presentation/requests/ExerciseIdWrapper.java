@@ -4,16 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@Data    
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateExerciseRequest {
-
-    private String name;
-    private Long muscleGroupId;
-    private Long machineId;
-
-   
+public class ExerciseIdWrapper {
+    
+    private String id;
 
 }
-

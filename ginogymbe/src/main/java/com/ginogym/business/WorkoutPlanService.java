@@ -19,7 +19,7 @@ public interface WorkoutPlanService {
 
     Optional<WorkoutPlanDTO> getWorkoutPlanById(Long id);
 
-    Page<WorkoutPlanDTO> getWorkoutPlansByUserId(Long userId, Pageable pageable);
+    // Page<WorkoutPlanDTO> getWorkoutPlansByUserId(Long userId, Pageable pageable);
 
     WorkoutPlanDTO createWorkoutPlan(CreateWorkoutPlanRequest workoutPlanDTO);
 

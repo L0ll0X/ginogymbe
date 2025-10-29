@@ -5,7 +5,8 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import com.ginogym.business.DTOs.ExerciseDetailDTO;
-
+import com.ginogym.presentation.requests.CreateExerciseDetailRequest;
+import com.ginogym.presentation.requests.ModifyExerciseDetailRequest;
 
 public interface ExerciseDetailService {
 
@@ -17,9 +18,11 @@ Page<ExerciseDetailDTO> getExerciseDetailByDayOfWeek(Long dayOfWeekId, Pageable 
 
 Optional<ExerciseDetailDTO> getExerciseDetailById(Long id);
 
-ExerciseDetailDTO createExerciseDetail(ExerciseDetailDTO exerciseDetailDTO);
+Page<ExerciseDetailDTO> getExerciseDetailByWorkoutPlan(Long workoutPlanId, Pageable pageable);
 
-ExerciseDetailDTO updateExerciseDetail(Long id, ExerciseDetailDTO exerciseDetailDTO);
+ExerciseDetailDTO createExerciseDetail(CreateExerciseDetailRequest exerciseDetailDTO);
+
+ExerciseDetailDTO updateExerciseDetail(Long id, ModifyExerciseDetailRequest exerciseDetailDTO);
 
 void deleteExerciseDetail(Long id);
 
