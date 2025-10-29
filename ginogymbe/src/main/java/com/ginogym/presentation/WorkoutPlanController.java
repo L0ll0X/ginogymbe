@@ -27,23 +27,17 @@ public class WorkoutPlanController {
     private final ExerciseMapper exerciseMapper;
 
     @GetMapping
-    public ResponseEntity<Page<WorkoutPlanDTO>> getAll(Pageable pageable) {
+    public ResponseEntity<PaginationResponse<WorkoutPlanDTO>> getAll(Pageable pageable) {
         Page<WorkoutPlanDTO> workoutPlan = workoutPlanService.getAllWorkoutPlans(pageable);
         PaginationResponse<WorkoutPlanDTO> response = new PaginationResponse<>(workoutPlan);
-        return ResponseEntity.ok(workoutPlan);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable Long id) {
-        Optional<WorkoutPlanDTO> workoutPlan;
-        try {
-            workoutPlan = workoutPlanService.getWorkoutPlanById(id);
-
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
-        return workoutPlan.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<WorkoutPlanDTO> getById(@PathVariable Long id) {
+       return workoutPlanService.getWorkoutPlanById(id)
+        .map(ResponseEntity::ok)
+        .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/workoutplan-exercises/{id}")

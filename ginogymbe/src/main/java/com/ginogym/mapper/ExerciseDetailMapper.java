@@ -1,10 +1,22 @@
 package com.ginogym.mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+
+import com.ginogym.business.DTOs.ExerciseDTO;
 import com.ginogym.business.DTOs.ExerciseDetailDTO;
+import com.ginogym.business.DTOs.MuscleGroupDTO;
+import com.ginogym.business.DTOs.WorkoutPlanDTO;
 import com.ginogym.data.entities.DayOfWeek;
 import com.ginogym.data.entities.Exercise;
 import com.ginogym.data.entities.ExerciseDetail;
+import com.ginogym.data.entities.Machine;
+import com.ginogym.data.entities.MuscleGroup;
+import com.ginogym.data.entities.WorkoutPlan;
+import com.ginogym.presentation.requests.CreateExerciseDetailRequest;
+import com.ginogym.presentation.requests.CreateExerciseRequest;
+import com.ginogym.presentation.requests.ModifyExerciseDetailRequest;
+import com.ginogym.presentation.requests.ModifyExerciseRequest;
+
 import jakarta.persistence.EntityNotFoundException;
 
 @Component
@@ -20,78 +32,65 @@ private final ModelMapper mapper;
         if (entity == null) {
             return null;
         }
-
         ExerciseDetailDTO dto = new ExerciseDetailDTO();
         dto.setId(entity.getId());
         dto.setSerie(entity.getSerie());
         dto.setRipetizioni(entity.getRipetizioni());
         dto.setRecupero(entity.getRecupero());
         dto.setPeso(entity.getPeso());
-
-        // Gestione relazioni manuale
         if (entity.getExercise() != null) {
-            dto.setExercises(entity.getExercise().getName()); // o id, a seconda del DTO
+            dto.setExercise(mapper.map(entity.getExercise(), ExerciseDTO.class));
         }
-
-        if (entity.getDaysOfWeek() != null) {
-            dto.setDayOfWeek(entity.getDaysOfWeek().getDescrizione()); // o id, se preferisci
+        if (entity.getWorkoutPlans() != null) {
+            dto.setWorkoutPlan(mapper.map(entity.getWorkoutPlans(), WorkoutPlanDTO.class));
         }
-
         return dto;
     }
 
-    // ✅ Conversione da DTO a Entity
     public ExerciseDetail toEntity(ExerciseDetailDTO dto) {
-        if (dto == null) {
-            return null;
-        }
-
-        ExerciseDetail entity = new ExerciseDetail();
-        entity.setId(dto.getId());
-        entity.setSerie(dto.getSerie());
-        entity.setRipetizioni(dto.getRipetizioni());
-        entity.setRecupero(dto.getRecupero());
-        entity.setPeso(dto.getPeso());
-
-        // Questi vanno gestiti fuori o tramite repository se devi caricarli da DB
-        // Ad esempio: se hai un service o repository per recuperarli
-        if (dto.getExercises() != null) {
-            Exercise esercizio = new Exercise();
-            esercizio.setName(dto.getExercises()); // oppure setId(dto.getExercisesId());
-            entity.setExercise(esercizio);
-        }
-
-        if (dto.getDayOfWeek() != null) {
-            DayOfWeek giorno = new DayOfWeek();
-            giorno.setDescrizione(dto.getDayOfWeek()); // oppure setId(dto.getDayOfWeekId());
-            entity.setDaysOfWeek(giorno);
-        }
-
-        return entity;
+         return mapper.map(dto, ExerciseDetail.class);
     }
 
-    public void updateExerciseDetailFromDTO(ExerciseDetailDTO dto, ExerciseDetail exerciseDetail) {
-        if (dto.getSerie() !=null) exerciseDetail.setSerie(dto.getSerie());
-        if (dto.getRipetizioni() !=null) exerciseDetail.setRipetizioni(dto.getRipetizioni());
-        if (dto.getRecupero() !=null) exerciseDetail.setRecupero(dto.getRecupero());
-        if (dto.getPeso() !=null) exerciseDetail.setPeso(dto.getPeso());
-        if (dto.getExercises() !=null) {
-           Exercise esercizioOptional = exerciseDetail.getExercise();
-            if (esercizioOptional != null) {
-                exerciseDetail.setExercise(esercizioOptional);
-            } else {
-                throw new EntityNotFoundException("Exercise non trovato con nome: " + dto.getExercises());
-            }
-        }
-        if (dto.getDayOfWeek() !=null) {
-           DayOfWeek giornoSettimanaOptional = exerciseDetail.getDaysOfWeek();
-            if (giornoSettimanaOptional != null) {
-                exerciseDetail.setDaysOfWeek(giornoSettimanaOptional);
-            } else {
-                throw new EntityNotFoundException("daysOfWeek non trovato con nome: " + dto.getDayOfWeek());
-            }
-        }
-        }
+    public ExerciseDetail requestToEntity(CreateExerciseDetailRequest request) {
+        ExerciseDetail e = mapper.map(request, ExerciseDetail.class);
+        e.setId(null);
+        return e;
+    }
 
+    // public void updateExerciseDetailFromDTO(ExerciseDetailDTO dto, ExerciseDetail exerciseDetail) {
+    //     if (dto.getSerie() !=null) exerciseDetail.setSerie(dto.getSerie());
+    //     if (dto.getRipetizioni() !=null) exerciseDetail.setRipetizioni(dto.getRipetizioni());
+    //     if (dto.getRecupero() !=null) exerciseDetail.setRecupero(dto.getRecupero());
+    //     if (dto.getPeso() !=null) exerciseDetail.setPeso(dto.getPeso());
+    //     if (dto.getExercise() !=null) {
+    //        Exercise esercizioOptional = exerciseDetail.getExercise();
+    //         if (esercizioOptional != null) {
+    //             exerciseDetail.setExercise(esercizioOptional);
+    //         } else {
+    //             throw new EntityNotFoundException("Exercise non trovato con nome: " + dto.getExercise());
+    //         }
+    //     }
+    //     if (dto.getWorkoutPlan() !=null) {
+    //        WorkoutPlan workoutPlanOptional = exerciseDetail.getWorkoutPlan();
+    //         if (workoutPlanOptional != null) {
+    //             exerciseDetail.setWorkoutPlan(workoutPlanOptional);
+    //         } else {
+    //             throw new EntityNotFoundException("WorkoutPlan non trovato con nome: " + dto.getWorkoutPlan());
+    //         }
+    //     }
+    //     }
+
+         public void requestUpdateExerciseDetailFromDTO(ModifyExerciseDetailRequest request, ExerciseDetail exerciseDetail, Exercise exercise, WorkoutPlan workoutPlan) {
+        if (request.getSerie() !=null) exerciseDetail.setSerie(request.getSerie());
+        if (request.getRipetizioni() !=null) exerciseDetail.setRipetizioni(request.getRipetizioni());
+        if (request.getRecupero() !=null) exerciseDetail.setRecupero(request.getRecupero());
+        if (request.getPeso() !=null) exerciseDetail.setPeso(request.getPeso());
+        if (exercise !=null) {
+                exerciseDetail.setExercise(exercise);
+        }
+        if (workoutPlan !=null) {
+                exerciseDetail.setWorkoutPlans(workoutPlan);
+            } 
+        }
 
 }

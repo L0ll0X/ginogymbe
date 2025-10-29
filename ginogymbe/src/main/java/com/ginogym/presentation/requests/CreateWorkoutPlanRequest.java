@@ -2,10 +2,6 @@ package com.ginogym.presentation.requests;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.ginogym.business.DTOs.ExerciseDetailDTO;
-import com.ginogym.data.entities.ExerciseDetail;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +12,8 @@ import lombok.NoArgsConstructor;
 public class CreateWorkoutPlanRequest {
     
     private String startDate; 
-    private String endDate; 
-    
-     private List<ExerciseDetailRequest> exerciseDetails = new ArrayList<>();
+    private String endDate;
+    private Long userId;
+    private List<CreateExerciseDetailRequest> exerciseDetails= new ArrayList<>();;
+
 }

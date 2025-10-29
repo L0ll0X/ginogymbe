@@ -15,7 +15,8 @@ public class ExerciseDetailDTO {
     private Long ripetizioni;
     private Long recupero;
     private Long peso;
-    private String dayOfWeek;
-    private String exercises;
+    private ExerciseDTO exercise;    
+    private WorkoutPlanDTO workoutPlan;  
+    private String dayOfWeekId;
 
 }

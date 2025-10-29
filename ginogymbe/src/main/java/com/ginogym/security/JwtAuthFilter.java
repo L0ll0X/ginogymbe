@@ -5,12 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import jakarta.servlet.FilterChain;
@@ -23,6 +23,12 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 
     private final JwtUtils jwtUtils;
     private final CustomUserDetailsService userDetailsService;
+
+    // 💡 LISTA DEI PERCORSI DA IGNORARE: 
+    // Il filtro non verrà eseguito se il path inizia con uno di questi.
+    private static final List<String> EXCLUDED_PATHS = Arrays.asList(
+        "/api/**"
+    );
 
      @Override
     protected void doFilterInternal(HttpServletRequest request,
