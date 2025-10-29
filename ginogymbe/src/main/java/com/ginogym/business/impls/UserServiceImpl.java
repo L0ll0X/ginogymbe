@@ -47,6 +47,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<UserDTO> getUserByName(String name) {
+        return userRepository.findByName(name)
+                .map(mapper::toDTO);
+    }
+
+    @Override
+    public Optional<UserDTO> getUserBylastName(String lastName) {
+        return userRepository.findBylastName(lastName)
+                .map(mapper::toDTO);
+    }
+
+    @Override
     public UserDTO createUser(UserDTO userDTO) {
         User user = mapper.toEntity(userDTO);
            if (userDTO.getRoles() != null && !userDTO.getRoles().isEmpty()) {

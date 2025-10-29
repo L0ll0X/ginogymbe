@@ -15,6 +15,10 @@ public interface UserService {
 
     Optional<UserDTO> getUserByEmail(String email);
 
+    Optional<UserDTO> getUserByName(String name);
+
+    Optional<UserDTO> getUserBylastName(String lastName);
+
     UserDTO createUser(UserDTO userDTO);
 
     UserDTO updateUser(Long id, UserDTO userDTO);
