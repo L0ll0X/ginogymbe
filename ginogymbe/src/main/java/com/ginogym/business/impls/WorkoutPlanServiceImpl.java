@@ -1,15 +1,9 @@
 package com.ginogym.business.impls;
 
-import com.ginogym.business.DTOs.ExerciseDTO;
-import com.ginogym.business.DTOs.ExerciseDetailDTO;
 import com.ginogym.business.DTOs.WorkoutPlanDTO;
 import com.ginogym.business.WorkoutPlanService;
 import com.ginogym.data.entities.Exercise;
 import com.ginogym.data.entities.ExerciseDetail;
-import com.ginogym.data.entities.ExerciseWorkoutPlan;
-import com.ginogym.data.entities.ExerciseWorkoutPlanId;
-import com.ginogym.data.entities.Machine;
-import com.ginogym.data.entities.MuscleGroup;
 import com.ginogym.data.entities.WorkoutPlan;
 import com.ginogym.data.repositories.ExerciseDetailRepository;
 import com.ginogym.data.repositories.ExerciseRepository;
@@ -17,7 +11,6 @@ import com.ginogym.data.repositories.ExerciseWorkoutPlanRepository;
 import com.ginogym.data.repositories.WorkoutPlanRepository;
 import com.ginogym.mapper.WorkoutPlanMapper;
 import com.ginogym.presentation.requests.CreateExerciseDetailRequest;
-import com.ginogym.presentation.requests.CreateExerciseRequest;
 import com.ginogym.presentation.requests.CreateWorkoutPlanRequest;
 import com.ginogym.presentation.requests.ModifyWorkoutPlanRequest;
 import org.springframework.beans.factory.annotation.Autowired;

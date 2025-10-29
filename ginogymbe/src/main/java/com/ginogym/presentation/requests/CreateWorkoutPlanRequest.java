@@ -13,7 +13,7 @@ public class CreateWorkoutPlanRequest {
     
     private String startDate; 
     private String endDate;
-    private Long userId;
+    // private Long userId;
     private List<CreateExerciseDetailRequest> exerciseDetails= new ArrayList<>();;
 
 }
