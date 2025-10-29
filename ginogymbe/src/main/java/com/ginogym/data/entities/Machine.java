@@ -1,4 +1,5 @@
 package com.ginogym.data.entities;
+import java.sql.Blob;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,7 +17,9 @@ public class Machine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Lob // indica un Large Object
+    @Column(name = "image") // opzionale, puoi specificare il nome della colonna
+    private byte[] image; // campo per salvare l’immagine
     private String name;          // e.g. "Leg Press"
     private String description;   // breve descrizione
     

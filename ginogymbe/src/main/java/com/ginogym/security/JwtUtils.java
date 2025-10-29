@@ -20,9 +20,8 @@ public class JwtUtils {
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private final long expiration = 1000 * 60 * 60 * 24; // 24 ore
 
-    public String generateToken(String username, Set<Role> roles) {
+    public String generateToken(String username, Set<String> roles) {
         String rolesString = roles.stream()
-                                  .map(Role::getName)
                                   .collect(Collectors.joining(","));
 
         return Jwts.builder()

@@ -41,6 +41,5 @@ public class ExerciseDetail {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workout_plan_id")
     private WorkoutPlan workoutPlans;
-
     
 }
