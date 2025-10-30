@@ -44,7 +44,7 @@ public class WorkoutPlanController {
     public ResponseEntity<List<ExerciseDTO>> getExercisesByWorkoutPlan(@PathVariable Long id) {
         List<ExerciseDTO> exercises = workoutPlanService.getExercisesByWorkoutPlan(id)
                 .stream()
-                .map(exerciseMapper::toDTO) // se hai un mapper
+                .map(exerciseMapper::toDTO) 
                 .toList();
 
         return ResponseEntity.ok(exercises);
