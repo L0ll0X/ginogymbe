@@ -1,5 +1,6 @@
 package com.ginogym.data.entities;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,15 +44,8 @@ public class Exercise {
     @JoinColumn(name = "machine_id")
     private Machine machine;
 
-    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExerciseDetail> exerciseDetails;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "exercises_workoutPlan",
-        joinColumns = @JoinColumn(name = "exercise_id"),
-        inverseJoinColumns = @JoinColumn(name = "workoutPlan_id")
-    )
-    private Set<WorkoutPlan> workoutPlans = new HashSet<>();
-    
 }
+

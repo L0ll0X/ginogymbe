@@ -16,11 +16,13 @@ import com.ginogym.presentation.requests.CreateWorkoutPlanRequest;
 import com.ginogym.presentation.requests.ModifyWorkoutPlanRequest;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-@RestController
-@RequestMapping("/api/workoutplans")
 @CrossOrigin(origins = "http://localhost:4200")
+@Slf4j
+@RequestMapping("/api/workoutplans")
 @RequiredArgsConstructor
+@RestController
 public class WorkoutPlanController {
 
     private final WorkoutPlanService workoutPlanService;

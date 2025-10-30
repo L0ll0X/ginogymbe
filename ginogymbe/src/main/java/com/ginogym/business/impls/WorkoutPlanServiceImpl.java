@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,6 +70,7 @@ public WorkoutPlanDTO createWorkoutPlan(CreateWorkoutPlanRequest workoutPlanRequ
     WorkoutPlan workoutPlan = workoutPlanMapper.requestToEntity(workoutPlanRequest);
     WorkoutPlan savedPlan = workoutPlanRepository.save(workoutPlan);
     List<CreateExerciseDetailRequest> exerciseDetailsRequests = workoutPlanRequest.getExerciseDetails();
+    savedPlan.setExerciseDetails(new ArrayList<>());
     if (exerciseDetailsRequests != null && !exerciseDetailsRequests.isEmpty()) {
         for (CreateExerciseDetailRequest detailRequest : exerciseDetailsRequests) {
             Long idEsercizio = detailRequest.getIdEsercizio(); // <-- Usa il metodo corretto del DTO
@@ -86,9 +88,12 @@ public WorkoutPlanDTO createWorkoutPlan(CreateWorkoutPlanRequest workoutPlanRequ
                     .workoutPlans(savedPlan)
                     .build();
             exerciseDetailRepository.save(detail);
+            savedPlan.getExerciseDetails().add(detail);
         }
     }
-    return workoutPlanMapper.toDTO(savedPlan);
+    WorkoutPlan finalSavedPlan = workoutPlanRepository.save(savedPlan);
+    return workoutPlanMapper.toDTO(finalSavedPlan);
+   
 }
 
     @Override

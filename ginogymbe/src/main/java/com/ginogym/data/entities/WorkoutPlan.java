@@ -3,8 +3,13 @@ package com.ginogym.data.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "workoutPlan")
@@ -25,7 +30,8 @@ public class WorkoutPlan {
     // @JoinColumn(name = "user_id") 
     // private User user;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "workoutPlans")
-    private Set<ExerciseDetail> exerciseDetails = new HashSet<>();
+    private List<ExerciseDetail> exerciseDetails = new ArrayList();
     
 }

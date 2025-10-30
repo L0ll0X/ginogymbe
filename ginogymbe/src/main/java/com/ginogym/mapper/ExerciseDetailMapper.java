@@ -41,9 +41,6 @@ private final ModelMapper mapper;
         if (entity.getExercise() != null) {
             dto.setExercise(mapper.map(entity.getExercise(), ExerciseDTO.class));
         }
-        if (entity.getWorkoutPlans() != null) {
-            dto.setWorkoutPlan(mapper.map(entity.getWorkoutPlans(), WorkoutPlanDTO.class));
-        }
         return dto;
     }
 
@@ -88,9 +85,6 @@ private final ModelMapper mapper;
         if (exercise !=null) {
                 exerciseDetail.setExercise(exercise);
         }
-        if (workoutPlan !=null) {
-                exerciseDetail.setWorkoutPlans(workoutPlan);
-            } 
-        }
+    }
 
 }

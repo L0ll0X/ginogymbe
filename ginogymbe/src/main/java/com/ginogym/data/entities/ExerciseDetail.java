@@ -1,5 +1,10 @@
 package com.ginogym.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -38,6 +43,7 @@ public class ExerciseDetail {
     @JoinColumn(name="days_of_week_id")
     private DayOfWeek daysOfWeek;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workout_plan_id")
     private WorkoutPlan workoutPlans;
