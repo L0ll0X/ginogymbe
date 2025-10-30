@@ -68,6 +68,7 @@ public class SecurityConfig {
         .authenticationProvider(authenticationProvider()) 
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/api/**").permitAll()
+            .requestMatchers("/api/workoutplans/**").permitAll()
             )
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
         .formLogin(AbstractHttpConfigurer::disable)

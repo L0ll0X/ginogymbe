@@ -3,7 +3,6 @@ package com.ginogym.security;
 import com.ginogym.business.DTOs.UserDTO;
 import com.ginogym.data.entities.Role;
 import com.ginogym.data.entities.User;
-import com.ginogym.data.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Set;
